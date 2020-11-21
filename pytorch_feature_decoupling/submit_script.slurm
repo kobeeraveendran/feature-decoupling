@@ -4,7 +4,7 @@
 #SBATCH --time=01:30:00
 #SBATCH --cpus-per-gpu=4
 #SBATCH --job-name=FeatureDecouplingTinyImagenet
-#SBATCH --output=out-SinGAN-%J.out
+#SBATCH --output=out-FD-TinyImagenet-%J.out
 #SBATCH --mail-type=END,FAIL
 #SBATCH --mail-user kobee.raveen@gmail.com
 
