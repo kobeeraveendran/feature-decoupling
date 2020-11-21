@@ -14,7 +14,7 @@ module load cuda/cuda-10.0
 source activate /home/cap6614.student6/my-envs/feat-decoupling
 
 echo
-time python /home/cap6614.student6/feature-decoupling/pytorch_feature_decoupling/main.py --exp=ImageNet_Decoupling_AlexNet --evaluate 0
+time python /home/cap6614.student6/feature-decoupling/pytorch_feature_decoupling/main.py --exp=ImageNet_Decoupling_AlexNet --evaluate 0 --num_workers 2
 echo
 
 # You're done!
