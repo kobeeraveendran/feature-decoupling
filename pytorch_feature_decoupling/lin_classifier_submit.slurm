@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#SBATCH --gpus=1
-#SBATCH --time=01:00:00
+#SBATCH --gpus=2
+#SBATCH --time=02:00:00
 #SBATCH --cpus-per-gpu=4
 #SBATCH --job-name=LinClassTinyImagenet
 #SBATCH --output=out-LinClass-TinyImagenet-%J.out
