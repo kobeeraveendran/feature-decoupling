@@ -30,7 +30,7 @@ net_optim_params = {'optim_type': 'sgd', 'lr': 0.1, 'momentum':0.9, 'weight_deca
 networks['feature'] = {'def_file': 'architectures/AlexNetFeature.py', 'pretrained': None, 'opt': {},  'optim_params': net_optim_params}
 
 # rotation classifier network
-networks['classifier'] = {'def_file': 'architectures/AlexNetClassifier.py', 'pretrained': None, 'opt': {'num_classes':4},  'optim_params': net_optim_params}
+networks['classifier'] = {'def_file': 'architectures/AlexNetClassifier.py', 'pretrained': None, 'opt': {'num_classes':2},  'optim_params': net_optim_params}
 
 # linear transformation normalization network
 low_dim = 128
