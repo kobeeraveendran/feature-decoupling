@@ -34,7 +34,7 @@ networks['classifier'] = {'def_file': 'architectures/AlexNetClassifier.py', 'pre
 
 # linear transformation normalization network
 low_dim = 128
-num_feat = 2048
+num_feat = 1024
 networks['norm'] = {'def_file': 'architectures/LinearTransformationNorm.py', 'pretrained': None, 'opt': {'low_dim':low_dim, 'num_feat':num_feat}, 'optim_params': net_optim_params}
 
 config['networks'] = networks
