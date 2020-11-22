@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #SBATCH --gpus=2
-#SBATCH --time=99:59:59
+#SBATCH --time=20:59:59
 #SBATCH --cpus-per-gpu=4
 #SBATCH --job-name=FeatureDecouplingTinyImagenet
 #SBATCH --output=out-FD-TinyImagenet-%J.out
