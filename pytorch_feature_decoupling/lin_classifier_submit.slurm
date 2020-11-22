@@ -1,12 +1,12 @@
 #!/bin/bash
 
 #SBATCH --gpus=1
-#SBATCH --time=01:30:00
+#SBATCH --time=04:00:00
 #SBATCH --cpus-per-gpu=4
 #SBATCH --job-name=LinClassTinyImagenet
 #SBATCH --output=out-LinClass-TinyImagenet-%J.out
 #SBATCH --mail-type=END,FAIL
-#SBATCH --mail-user "kobee.raveen@gmail.com"
+#SBATCH --mail-user kobee.raveen@gmail.com
 
 module load anaconda/anaconda3
 module load cuda/cuda-10.0
