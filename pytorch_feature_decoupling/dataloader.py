@@ -165,7 +165,7 @@ class DataLoader(object):
                 idx = idx % len(self.dataset)
                 img, _, index = self.dataset[idx]
                 #rotation_labels = torch.LongTensor([0, 1, 2, 3])
-                rotation_labels = torch.LongTensor([0, 1])      # 0 for no rotation, 1 for any non-original rotation value
+                rotation_labels = torch.LongTensor([0, 1, 1, 1])      # 0 for no rotation, 1 for any non-original rotation value
                 image_indices = torch.LongTensor([index, index, index, index])
                 return img, rotation_labels, image_indices
             def _collate_fun(batch):

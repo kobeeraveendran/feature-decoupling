@@ -75,7 +75,7 @@ class DecouplingModel(Algorithm):
 
         with torch.set_grad_enabled(True):
             feature = self.networks['feature'](dataX)
-            feature_rot, feature_invariance = torch.split(feature, 1024, dim=1)
+            feature_rot, feature_invariance = torch.split(feature, 2048, dim=1)
 
             pred = self.networks['classifier'](feature_rot)
 
@@ -87,7 +87,7 @@ class DecouplingModel(Algorithm):
             self.tensors['index_index'].resize_(torch.Size([int(index.size(0)/4)])).copy_(index[0::4])
             index_instance = self.tensors['index_index']
             feature_invariance_instance_mean = torch.unsqueeze(feature_invariance_instance,1).expand(-1,4,-1).clone()
-            feature_invariance_instance_mean = feature_invariance_instance_mean.view(4*len(feature_invariance_instance),1024)
+            feature_invariance_instance_mean = feature_invariance_instance_mean.view(4*len(feature_invariance_instance),2048)
         #********************************************************
 
         #*************** COMPUTE LOSSES *************************
@@ -155,7 +155,7 @@ class DecouplingModel(Algorithm):
 
         with torch.set_grad_enabled(False):
             feature = self.networks['feature'](dataX)
-            feature_rot, feature_invariance = torch.split(feature, 1024, dim=1)
+            feature_rot, feature_invariance = torch.split(feature, 2048, dim=1)
             pred_rot = self.networks['classifier'](feature_rot)
             pred_inv = self.networks['classifier'](feature_invariance)
         #********************************************************

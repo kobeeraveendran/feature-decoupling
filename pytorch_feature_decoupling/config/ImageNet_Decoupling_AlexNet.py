@@ -18,7 +18,7 @@ data_test_opt['split'] = 'val'
 
 config['data_train_opt'] = data_train_opt
 config['data_test_opt']  = data_test_opt
-config['max_num_epochs'] = 200
+config['max_num_epochs'] = 2000
 
 
 
@@ -30,11 +30,11 @@ net_optim_params = {'optim_type': 'sgd', 'lr': 0.1, 'momentum':0.9, 'weight_deca
 networks['feature'] = {'def_file': 'architectures/AlexNetFeature.py', 'pretrained': None, 'opt': {},  'optim_params': net_optim_params}
 
 # rotation classifier network
-networks['classifier'] = {'def_file': 'architectures/AlexNetClassifier.py', 'pretrained': None, 'opt': {'num_classes':2},  'optim_params': net_optim_params}
+networks['classifier'] = {'def_file': 'architectures/AlexNetClassifier.py', 'pretrained': None, 'opt': {'num_classes':4},  'optim_params': net_optim_params}
 
 # linear transformation normalization network
 low_dim = 128
-num_feat = 1024
+num_feat = 2048
 networks['norm'] = {'def_file': 'architectures/LinearTransformationNorm.py', 'pretrained': None, 'opt': {'low_dim':low_dim, 'num_feat':num_feat}, 'optim_params': net_optim_params}
 
 config['networks'] = networks
