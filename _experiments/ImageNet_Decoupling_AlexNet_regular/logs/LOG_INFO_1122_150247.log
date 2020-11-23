@@ -1,0 +1,524 @@
+[2020-11-22 15:02:47] INFO: Algorithm options {'data_train_opt': {'batch_size': 512, 'unsupervised': True, 'random_sized_crop': True, 'dataset_name': 'imagenet', 'split': 'train'}, 'data_test_opt': {'batch_size': 512, 'unsupervised': True, 'random_sized_crop': False, 'dataset_name': 'imagenet', 'split': 'val'}, 'max_num_epochs': 200, 'networks': {'feature': {'def_file': 'architectures/AlexNetFeature.py', 'pretrained': None, 'opt': {}, 'optim_params': {'optim_type': 'sgd', 'lr': 0.1, 'momentum': 0.9, 'weight_decay': 0.0005, 'nesterov': True, 'LUT_lr': [(90, 0.01), (130, 0.001), (190, 0.0001), (210, 1e-05), (230, 0.0001), (245, 1e-05)]}}, 'classifier': {'def_file': 'architectures/AlexNetClassifier.py', 'pretrained': None, 'opt': {'num_classes': 4}, 'optim_params': {'optim_type': 'sgd', 'lr': 0.1, 'momentum': 0.9, 'weight_decay': 0.0005, 'nesterov': True, 'LUT_lr': [(90, 0.01), (130, 0.001), (190, 0.0001), (210, 1e-05), (230, 0.0001), (245, 1e-05)]}}, 'norm': {'def_file': 'architectures/LinearTransformationNorm.py', 'pretrained': None, 'opt': {'low_dim': 128, 'num_feat': 2048}, 'optim_params': {'optim_type': 'sgd', 'lr': 0.1, 'momentum': 0.9, 'weight_decay': 0.0005, 'nesterov': True, 'LUT_lr': [(90, 0.01), (130, 0.001), (190, 0.0001), (210, 1e-05), (230, 0.0001), (245, 1e-05)]}}}, 'criterions': {'loss_cls': {'ctype': 'CrossEntropyLoss', 'opt': {'reduce': False}}, 'loss_mse': {'ctype': 'MSELoss', 'opt': None}, 'nce_average': {'ctype': 'NCEAverage', 'opt': {'def_file': 'architectures/NCEAverage.py', 'net_opt': {'low_dim': 128, 'ndata': 1281167, 'nce_k': 4096, 'nce_t': 0.07, 'nce_m': 0.5}}}, 'nce_criterion': {'ctype': 'NCECriterion', 'opt': {'def_file': 'architectures/NCECriterion.py', 'net_opt': {'ndata': 1281167}}}}, 'lambda_loss': {'cls': 1.0, 'mse': 1.0, 'nce': 1.0}, 'gama': 2, 'algorithm_type': 'DecouplingModel', 'exp_dir': '../_experiments/ImageNet_Decoupling_AlexNet', 'disp_step': 1}
+[2020-11-22 15:02:47] INFO: Set network feature
+[2020-11-22 15:02:47] INFO: ==> Initiliaze network feature from file architectures/AlexNetFeature.py with opts: {}
+[2020-11-22 15:02:47] INFO: Set network classifier
+[2020-11-22 15:02:47] INFO: ==> Initiliaze network classifier from file architectures/AlexNetClassifier.py with opts: {'num_classes': 4}
+[2020-11-22 15:02:47] INFO: Set network norm
+[2020-11-22 15:02:47] INFO: ==> Initiliaze network norm from file architectures/LinearTransformationNorm.py with opts: {'low_dim': 128, 'num_feat': 2048}
+[2020-11-22 15:02:47] INFO: Initialize criterion[loss_cls]: CrossEntropyLoss with options: {'reduce': False}
+[2020-11-22 15:02:47] INFO: Initialize criterion[loss_mse]: MSELoss with options: None
+[2020-11-22 15:02:47] INFO: Initialize criterion[nce_average]: NCEAverage with options: {'def_file': 'architectures/NCEAverage.py', 'net_opt': {'low_dim': 128, 'ndata': 1281167, 'nce_k': 4096, 'nce_t': 0.07, 'nce_m': 0.5}}
+[2020-11-22 15:03:11] INFO: Initialize criterion[nce_criterion]: NCECriterion with options: {'def_file': 'architectures/NCECriterion.py', 'net_opt': {'ndata': 1281167}}
+[2020-11-22 15:03:11] INFO: ==> Initiliaze network NCECriterion from file architectures/NCECriterion.py with opts: {'ndata': 1281167}
+[2020-11-22 15:03:20] INFO: Initialize optimizer: sgd with params: {'optim_type': 'sgd', 'lr': 0.1, 'momentum': 0.9, 'weight_decay': 0.0005, 'nesterov': True, 'LUT_lr': [(90, 0.01), (130, 0.001), (190, 0.0001), (210, 1e-05), (230, 0.0001), (245, 1e-05)]} for network: feature
+[2020-11-22 15:03:20] INFO: Initialize optimizer: sgd with params: {'optim_type': 'sgd', 'lr': 0.1, 'momentum': 0.9, 'weight_decay': 0.0005, 'nesterov': True, 'LUT_lr': [(90, 0.01), (130, 0.001), (190, 0.0001), (210, 1e-05), (230, 0.0001), (245, 1e-05)]} for network: classifier
+[2020-11-22 15:03:20] INFO: Initialize optimizer: sgd with params: {'optim_type': 'sgd', 'lr': 0.1, 'momentum': 0.9, 'weight_decay': 0.0005, 'nesterov': True, 'LUT_lr': [(90, 0.01), (130, 0.001), (190, 0.0001), (210, 1e-05), (230, 0.0001), (245, 1e-05)]} for network: norm
+[2020-11-22 15:03:20] INFO: 
+
+[2020-11-22 15:03:20] INFO: Training epoch [  1 / 200]
+[2020-11-22 15:03:20] INFO: ==> Set to feature optimizer lr = 0.0100000000
+[2020-11-22 15:03:20] INFO: ==> Set to classifier optimizer lr = 0.0100000000
+[2020-11-22 15:03:20] INFO: ==> Set to norm optimizer lr = 0.0100000000
+[2020-11-22 15:03:20] INFO: Training: ImageNet_Decoupling_AlexNet
+[2020-11-22 15:03:20] INFO: ==> Dataset: imagenet_train [100000 images]
+[2020-11-22 15:03:20] INFO: ==> Iteration steps in one epoch: 196 [batch size 512]
+[2020-11-22 15:03:30] INFO: ==> Iteration [  1][   1 /  196]: {'prec_cls': 26.709, 'loss': 11.733, 'loss_cls': 1.4104, 'loss_mse': 0.079, 'loss_nce': 10.2436, 'load_time': 5.8034, 'process_time': 94.1966}
+[2020-11-22 15:03:30] INFO: ==> Iteration [  1][   2 /  196]: {'prec_cls': 25.6592, 'loss': 11.7915, 'loss_cls': 1.4091, 'loss_mse': 0.0788, 'loss_nce': 10.3036, 'load_time': 29.8254, 'process_time': 70.1746}
+[2020-11-22 15:03:33] INFO: ==> Iteration [  1][   3 /  196]: {'prec_cls': 25.9277, 'loss': 11.8192, 'loss_cls': 1.4024, 'loss_mse': 0.0785, 'loss_nce': 10.3383, 'load_time': 34.4266, 'process_time': 65.5734}
+[2020-11-22 15:03:34] INFO: ==> Iteration [  1][   4 /  196]: {'prec_cls': 26.2695, 'loss': 11.8172, 'loss_cls': 1.3983, 'loss_mse': 0.0779, 'loss_nce': 10.341, 'load_time': 40.4974, 'process_time': 59.5026}
+[2020-11-22 15:03:40] INFO: ==> Iteration [  1][   5 /  196]: {'prec_cls': 26.709, 'loss': 11.8609, 'loss_cls': 1.3954, 'loss_mse': 0.0772, 'loss_nce': 10.3882, 'load_time': 41.1503, 'process_time': 58.8497}
+[2020-11-22 15:03:41] INFO: ==> Iteration [  1][   6 /  196]: {'prec_cls': 26.945, 'loss': 11.8936, 'loss_cls': 1.3944, 'loss_mse': 0.0765, 'loss_nce': 10.4227, 'load_time': 42.5477, 'process_time': 57.4523}
+[2020-11-22 15:03:46] INFO: ==> Iteration [  1][   7 /  196]: {'prec_cls': 27.1833, 'loss': 11.9557, 'loss_cls': 1.3932, 'loss_mse': 0.0759, 'loss_nce': 10.4866, 'load_time': 42.8597, 'process_time': 57.1403}
+[2020-11-22 15:03:47] INFO: ==> Iteration [  1][   8 /  196]: {'prec_cls': 27.5452, 'loss': 12.0175, 'loss_cls': 1.3897, 'loss_mse': 0.0752, 'loss_nce': 10.5525, 'load_time': 44.845, 'process_time': 55.155}
+[2020-11-22 15:03:52] INFO: ==> Iteration [  1][   9 /  196]: {'prec_cls': 27.7778, 'loss': 12.0785, 'loss_cls': 1.3885, 'loss_mse': 0.0745, 'loss_nce': 10.6155, 'load_time': 44.6405, 'process_time': 55.3595}
+[2020-11-22 15:03:52] INFO: ==> Iteration [  1][  10 /  196]: {'prec_cls': 28.1396, 'loss': 12.1434, 'loss_cls': 1.3869, 'loss_mse': 0.0737, 'loss_nce': 10.6828, 'load_time': 46.2105, 'process_time': 53.7895}
+[2020-11-22 15:03:57] INFO: ==> Iteration [  1][  11 /  196]: {'prec_cls': 28.5866, 'loss': 12.2112, 'loss_cls': 1.384, 'loss_mse': 0.0729, 'loss_nce': 10.7543, 'load_time': 45.9616, 'process_time': 54.0384}
+[2020-11-22 15:03:58] INFO: ==> Iteration [  1][  12 /  196]: {'prec_cls': 28.9632, 'loss': 12.2883, 'loss_cls': 1.3821, 'loss_mse': 0.0718, 'loss_nce': 10.8344, 'load_time': 47.0811, 'process_time': 52.9189}
+[2020-11-22 15:04:03] INFO: ==> Iteration [  1][  13 /  196]: {'prec_cls': 29.3006, 'loss': 12.3667, 'loss_cls': 1.3812, 'loss_mse': 0.0706, 'loss_nce': 10.9149, 'load_time': 46.7949, 'process_time': 53.2051}
+[2020-11-22 15:04:04] INFO: ==> Iteration [  1][  14 /  196]: {'prec_cls': 29.6631, 'loss': 12.4212, 'loss_cls': 1.3796, 'loss_mse': 0.0693, 'loss_nce': 10.9724, 'load_time': 47.678, 'process_time': 52.322}
+[2020-11-22 15:04:09] INFO: ==> Iteration [  1][  15 /  196]: {'prec_cls': 29.7689, 'loss': 12.4987, 'loss_cls': 1.3797, 'loss_mse': 0.068, 'loss_nce': 11.051, 'load_time': 47.3979, 'process_time': 52.6021}
+[2020-11-22 15:04:10] INFO: ==> Iteration [  1][  16 /  196]: {'prec_cls': 30.13, 'loss': 12.5753, 'loss_cls': 1.3779, 'loss_mse': 0.0667, 'loss_nce': 11.1307, 'load_time': 48.1425, 'process_time': 51.8575}
+[2020-11-22 15:04:15] INFO: ==> Iteration [  1][  17 /  196]: {'prec_cls': 30.2849, 'loss': 12.6508, 'loss_cls': 1.3771, 'loss_mse': 0.0654, 'loss_nce': 11.2083, 'load_time': 47.8739, 'process_time': 52.1261}
+[2020-11-22 15:04:16] INFO: ==> Iteration [  1][  18 /  196]: {'prec_cls': 30.5528, 'loss': 12.7262, 'loss_cls': 1.3761, 'loss_mse': 0.0642, 'loss_nce': 11.286, 'load_time': 48.6023, 'process_time': 51.3977}
+[2020-11-22 15:04:21] INFO: ==> Iteration [  1][  19 /  196]: {'prec_cls': 30.9185, 'loss': 12.8007, 'loss_cls': 1.3739, 'loss_mse': 0.0629, 'loss_nce': 11.364, 'load_time': 48.3275, 'process_time': 51.6725}
+[2020-11-22 15:04:21] INFO: ==> Iteration [  1][  20 /  196]: {'prec_cls': 31.1108, 'loss': 12.875, 'loss_cls': 1.372, 'loss_mse': 0.0616, 'loss_nce': 11.4414, 'load_time': 48.8747, 'process_time': 51.1253}
+[2020-11-22 15:04:26] INFO: ==> Iteration [  1][  21 /  196]: {'prec_cls': 31.2779, 'loss': 12.9434, 'loss_cls': 1.371, 'loss_mse': 0.0604, 'loss_nce': 11.512, 'load_time': 48.6402, 'process_time': 51.3598}
+[2020-11-22 15:04:27] INFO: ==> Iteration [  1][  22 /  196]: {'prec_cls': 31.3876, 'loss': 13.0098, 'loss_cls': 1.3703, 'loss_mse': 0.0592, 'loss_nce': 11.5803, 'load_time': 49.1222, 'process_time': 50.8778}
+[2020-11-22 15:04:32] INFO: ==> Iteration [  1][  23 /  196]: {'prec_cls': 31.5196, 'loss': 13.085, 'loss_cls': 1.3697, 'loss_mse': 0.058, 'loss_nce': 11.6573, 'load_time': 48.8727, 'process_time': 51.1273}
+[2020-11-22 15:04:33] INFO: ==> Iteration [  1][  24 /  196]: {'prec_cls': 31.7342, 'loss': 13.1486, 'loss_cls': 1.3677, 'loss_mse': 0.0569, 'loss_nce': 11.724, 'load_time': 49.3061, 'process_time': 50.6939}
+[2020-11-22 15:04:38] INFO: ==> Iteration [  1][  25 /  196]: {'prec_cls': 31.8828, 'loss': 13.212, 'loss_cls': 1.3665, 'loss_mse': 0.0559, 'loss_nce': 11.7896, 'load_time': 49.0626, 'process_time': 50.9374}
+[2020-11-22 15:04:38] INFO: ==> Iteration [  1][  26 /  196]: {'prec_cls': 32.0463, 'loss': 13.2718, 'loss_cls': 1.3657, 'loss_mse': 0.0549, 'loss_nce': 11.8513, 'load_time': 49.4567, 'process_time': 50.5433}
+[2020-11-22 15:04:43] INFO: ==> Iteration [  1][  27 /  196]: {'prec_cls': 32.1325, 'loss': 13.3213, 'loss_cls': 1.3647, 'loss_mse': 0.054, 'loss_nce': 11.9026, 'load_time': 49.2419, 'process_time': 50.7581}
+[2020-11-22 15:04:44] INFO: ==> Iteration [  1][  28 /  196]: {'prec_cls': 32.2231, 'loss': 13.3844, 'loss_cls': 1.3647, 'loss_mse': 0.0531, 'loss_nce': 11.9667, 'load_time': 49.6624, 'process_time': 50.3376}
+[2020-11-22 15:04:49] INFO: ==> Iteration [  1][  29 /  196]: {'prec_cls': 32.3209, 'loss': 13.4415, 'loss_cls': 1.3632, 'loss_mse': 0.0522, 'loss_nce': 12.0262, 'load_time': 49.4511, 'process_time': 50.5489}
+[2020-11-22 15:04:50] INFO: ==> Iteration [  1][  30 /  196]: {'prec_cls': 32.3779, 'loss': 13.5076, 'loss_cls': 1.3628, 'loss_mse': 0.0513, 'loss_nce': 12.0935, 'load_time': 49.7805, 'process_time': 50.2195}
+[2020-11-22 15:04:55] INFO: ==> Iteration [  1][  31 /  196]: {'prec_cls': 32.5825, 'loss': 13.5578, 'loss_cls': 1.3616, 'loss_mse': 0.0505, 'loss_nce': 12.1457, 'load_time': 49.5658, 'process_time': 50.4342}
+[2020-11-22 15:04:56] INFO: ==> Iteration [  1][  32 /  196]: {'prec_cls': 32.6859, 'loss': 13.6156, 'loss_cls': 1.3612, 'loss_mse': 0.0498, 'loss_nce': 12.2046, 'load_time': 49.8665, 'process_time': 50.1335}
+[2020-11-22 15:05:01] INFO: ==> Iteration [  1][  33 /  196]: {'prec_cls': 32.8317, 'loss': 13.6708, 'loss_cls': 1.3604, 'loss_mse': 0.049, 'loss_nce': 12.2614, 'load_time': 49.6714, 'process_time': 50.3286}
+[2020-11-22 15:05:02] INFO: ==> Iteration [  1][  34 /  196]: {'prec_cls': 32.8944, 'loss': 13.7288, 'loss_cls': 1.3597, 'loss_mse': 0.0483, 'loss_nce': 12.3208, 'load_time': 49.8938, 'process_time': 50.1062}
+[2020-11-22 15:05:07] INFO: ==> Iteration [  1][  35 /  196]: {'prec_cls': 33.0148, 'loss': 13.7859, 'loss_cls': 1.3587, 'loss_mse': 0.0475, 'loss_nce': 12.3796, 'load_time': 49.7044, 'process_time': 50.2956}
+[2020-11-22 15:05:08] INFO: ==> Iteration [  1][  36 /  196]: {'prec_cls': 33.1434, 'loss': 13.8374, 'loss_cls': 1.3579, 'loss_mse': 0.0468, 'loss_nce': 12.4327, 'load_time': 49.9615, 'process_time': 50.0385}
+[2020-11-22 15:05:13] INFO: ==> Iteration [  1][  37 /  196]: {'prec_cls': 33.2044, 'loss': 13.8943, 'loss_cls': 1.3576, 'loss_mse': 0.0462, 'loss_nce': 12.4906, 'load_time': 49.7911, 'process_time': 50.2089}
+[2020-11-22 15:05:14] INFO: ==> Iteration [  1][  38 /  196]: {'prec_cls': 33.2198, 'loss': 13.9458, 'loss_cls': 1.3574, 'loss_mse': 0.0456, 'loss_nce': 12.5428, 'load_time': 50.0393, 'process_time': 49.9607}
+[2020-11-22 15:05:19] INFO: ==> Iteration [  1][  39 /  196]: {'prec_cls': 33.2945, 'loss': 13.9937, 'loss_cls': 1.3564, 'loss_mse': 0.045, 'loss_nce': 12.5923, 'load_time': 49.873, 'process_time': 50.127}
+[2020-11-22 15:05:20] INFO: ==> Iteration [  1][  40 /  196]: {'prec_cls': 33.3386, 'loss': 14.0399, 'loss_cls': 1.3562, 'loss_mse': 0.0444, 'loss_nce': 12.6393, 'load_time': 50.1099, 'process_time': 49.8901}
+[2020-11-22 15:05:25] INFO: ==> Iteration [  1][  41 /  196]: {'prec_cls': 33.3579, 'loss': 14.0826, 'loss_cls': 1.3561, 'loss_mse': 0.0439, 'loss_nce': 12.6827, 'load_time': 49.9575, 'process_time': 50.0425}
+[2020-11-22 15:05:26] INFO: ==> Iteration [  1][  42 /  196]: {'prec_cls': 33.3717, 'loss': 14.1245, 'loss_cls': 1.3559, 'loss_mse': 0.0434, 'loss_nce': 12.7253, 'load_time': 50.1943, 'process_time': 49.8057}
+[2020-11-22 15:05:31] INFO: ==> Iteration [  1][  43 /  196]: {'prec_cls': 33.4688, 'loss': 14.1647, 'loss_cls': 1.3549, 'loss_mse': 0.0429, 'loss_nce': 12.767, 'load_time': 50.0442, 'process_time': 49.9558}
+[2020-11-22 15:05:31] INFO: ==> Iteration [  1][  44 /  196]: {'prec_cls': 33.5005, 'loss': 14.2017, 'loss_cls': 1.3547, 'loss_mse': 0.0424, 'loss_nce': 12.8046, 'load_time': 50.254, 'process_time': 49.746}
+[2020-11-22 15:05:36] INFO: ==> Iteration [  1][  45 /  196]: {'prec_cls': 33.4776, 'loss': 14.2386, 'loss_cls': 1.3546, 'loss_mse': 0.042, 'loss_nce': 12.842, 'load_time': 50.1104, 'process_time': 49.8896}
+[2020-11-22 15:05:37] INFO: ==> Iteration [  1][  46 /  196]: {'prec_cls': 33.5386, 'loss': 14.2778, 'loss_cls': 1.3541, 'loss_mse': 0.0416, 'loss_nce': 12.8822, 'load_time': 50.313, 'process_time': 49.687}
+[2020-11-22 15:05:42] INFO: ==> Iteration [  1][  47 /  196]: {'prec_cls': 33.5667, 'loss': 14.311, 'loss_cls': 1.3538, 'loss_mse': 0.0411, 'loss_nce': 12.916, 'load_time': 50.1722, 'process_time': 49.8278}
+[2020-11-22 15:05:43] INFO: ==> Iteration [  1][  48 /  196]: {'prec_cls': 33.609, 'loss': 14.3443, 'loss_cls': 1.3533, 'loss_mse': 0.0407, 'loss_nce': 12.9502, 'load_time': 50.3784, 'process_time': 49.6216}
+[2020-11-22 15:05:48] INFO: ==> Iteration [  1][  49 /  196]: {'prec_cls': 33.6246, 'loss': 14.3755, 'loss_cls': 1.3532, 'loss_mse': 0.0404, 'loss_nce': 12.9819, 'load_time': 50.2419, 'process_time': 49.7581}
+[2020-11-22 15:05:48] INFO: ==> Iteration [  1][  50 /  196]: {'prec_cls': 33.6396, 'loss': 14.4077, 'loss_cls': 1.353, 'loss_mse': 0.0401, 'loss_nce': 13.0146, 'load_time': 50.4244, 'process_time': 49.5756}
+[2020-11-22 15:05:54] INFO: ==> Iteration [  1][  51 /  196]: {'prec_cls': 33.7019, 'loss': 14.4398, 'loss_cls': 1.3525, 'loss_mse': 0.0398, 'loss_nce': 13.0476, 'load_time': 50.2926, 'process_time': 49.7074}
+[2020-11-22 15:05:54] INFO: ==> Iteration [  1][  52 /  196]: {'prec_cls': 33.7074, 'loss': 14.468, 'loss_cls': 1.3523, 'loss_mse': 0.0395, 'loss_nce': 13.0762, 'load_time': 50.4726, 'process_time': 49.5274}
+[2020-11-22 15:06:00] INFO: ==> Iteration [  1][  53 /  196]: {'prec_cls': 33.8158, 'loss': 14.4966, 'loss_cls': 1.3513, 'loss_mse': 0.0392, 'loss_nce': 13.1061, 'load_time': 50.3427, 'process_time': 49.6573}
+[2020-11-22 15:06:00] INFO: ==> Iteration [  1][  54 /  196]: {'prec_cls': 33.8885, 'loss': 14.5272, 'loss_cls': 1.3509, 'loss_mse': 0.039, 'loss_nce': 13.1373, 'load_time': 50.5044, 'process_time': 49.4956}
+[2020-11-22 15:06:05] INFO: ==> Iteration [  1][  55 /  196]: {'prec_cls': 33.9054, 'loss': 14.557, 'loss_cls': 1.351, 'loss_mse': 0.0388, 'loss_nce': 13.1672, 'load_time': 50.3765, 'process_time': 49.6235}
+[2020-11-22 15:06:06] INFO: ==> Iteration [  1][  56 /  196]: {'prec_cls': 33.9321, 'loss': 14.5871, 'loss_cls': 1.3512, 'loss_mse': 0.0386, 'loss_nce': 13.1973, 'load_time': 50.5349, 'process_time': 49.4651}
+[2020-11-22 15:06:11] INFO: ==> Iteration [  1][  57 /  196]: {'prec_cls': 33.9518, 'loss': 14.6127, 'loss_cls': 1.351, 'loss_mse': 0.0385, 'loss_nce': 13.2233, 'load_time': 50.4055, 'process_time': 49.5945}
+[2020-11-22 15:06:12] INFO: ==> Iteration [  1][  58 /  196]: {'prec_cls': 33.9869, 'loss': 14.6403, 'loss_cls': 1.3508, 'loss_mse': 0.0384, 'loss_nce': 13.2511, 'load_time': 50.5627, 'process_time': 49.4373}
+[2020-11-22 15:06:17] INFO: ==> Iteration [  1][  59 /  196]: {'prec_cls': 34.0009, 'loss': 14.6703, 'loss_cls': 1.3506, 'loss_mse': 0.0383, 'loss_nce': 13.2813, 'load_time': 50.4446, 'process_time': 49.5554}
+[2020-11-22 15:06:17] INFO: ==> Iteration [  1][  60 /  196]: {'prec_cls': 34.0356, 'loss': 14.6988, 'loss_cls': 1.3505, 'loss_mse': 0.0382, 'loss_nce': 13.31, 'load_time': 50.5949, 'process_time': 49.4051}
+[2020-11-22 15:06:23] INFO: ==> Iteration [  1][  61 /  196]: {'prec_cls': 34.0764, 'loss': 14.7303, 'loss_cls': 1.3503, 'loss_mse': 0.0381, 'loss_nce': 13.3419, 'load_time': 50.4818, 'process_time': 49.5182}
+[2020-11-22 15:06:23] INFO: ==> Iteration [  1][  62 /  196]: {'prec_cls': 34.0789, 'loss': 14.7572, 'loss_cls': 1.3504, 'loss_mse': 0.0379, 'loss_nce': 13.3689, 'load_time': 50.6252, 'process_time': 49.3748}
+[2020-11-22 15:06:29] INFO: ==> Iteration [  1][  63 /  196]: {'prec_cls': 34.1316, 'loss': 14.7839, 'loss_cls': 1.35, 'loss_mse': 0.0378, 'loss_nce': 13.3961, 'load_time': 50.5148, 'process_time': 49.4852}
+[2020-11-22 15:06:29] INFO: ==> Iteration [  1][  64 /  196]: {'prec_cls': 34.1812, 'loss': 14.8114, 'loss_cls': 1.3497, 'loss_mse': 0.0377, 'loss_nce': 13.424, 'load_time': 50.6521, 'process_time': 49.3479}
+[2020-11-22 15:06:34] INFO: ==> Iteration [  1][  65 /  196]: {'prec_cls': 34.2067, 'loss': 14.8404, 'loss_cls': 1.3498, 'loss_mse': 0.0376, 'loss_nce': 13.453, 'load_time': 50.5432, 'process_time': 49.4568}
+[2020-11-22 15:06:35] INFO: ==> Iteration [  1][  66 /  196]: {'prec_cls': 34.2278, 'loss': 14.8665, 'loss_cls': 1.3498, 'loss_mse': 0.0374, 'loss_nce': 13.4792, 'load_time': 50.6765, 'process_time': 49.3235}
+[2020-11-22 15:06:40] INFO: ==> Iteration [  1][  67 /  196]: {'prec_cls': 34.2679, 'loss': 14.8915, 'loss_cls': 1.3496, 'loss_mse': 0.0372, 'loss_nce': 13.5047, 'load_time': 50.5651, 'process_time': 49.4349}
+[2020-11-22 15:06:41] INFO: ==> Iteration [  1][  68 /  196]: {'prec_cls': 34.296, 'loss': 14.9154, 'loss_cls': 1.3491, 'loss_mse': 0.0371, 'loss_nce': 13.5292, 'load_time': 50.6917, 'process_time': 49.3083}
+[2020-11-22 15:06:47] INFO: ==> Iteration [  1][  69 /  196]: {'prec_cls': 34.2788, 'loss': 14.9412, 'loss_cls': 1.3492, 'loss_mse': 0.0369, 'loss_nce': 13.5551, 'load_time': 50.5892, 'process_time': 49.4108}
+[2020-11-22 15:06:47] INFO: ==> Iteration [  1][  70 /  196]: {'prec_cls': 34.3045, 'loss': 14.9637, 'loss_cls': 1.3491, 'loss_mse': 0.0367, 'loss_nce': 13.5779, 'load_time': 50.7127, 'process_time': 49.2873}
+[2020-11-22 15:06:52] INFO: ==> Iteration [  1][  71 /  196]: {'prec_cls': 34.3537, 'loss': 14.9868, 'loss_cls': 1.3488, 'loss_mse': 0.0366, 'loss_nce': 13.6015, 'load_time': 50.6217, 'process_time': 49.3783}
+[2020-11-22 15:06:53] INFO: ==> Iteration [  1][  72 /  196]: {'prec_cls': 34.3635, 'loss': 15.0111, 'loss_cls': 1.3486, 'loss_mse': 0.0364, 'loss_nce': 13.6261, 'load_time': 50.7285, 'process_time': 49.2715}
+[2020-11-22 15:06:59] INFO: ==> Iteration [  1][  73 /  196]: {'prec_cls': 34.3864, 'loss': 15.0325, 'loss_cls': 1.3484, 'loss_mse': 0.0362, 'loss_nce': 13.6479, 'load_time': 50.6206, 'process_time': 49.3794}
+[2020-11-22 15:06:59] INFO: ==> Iteration [  1][  74 /  196]: {'prec_cls': 34.408, 'loss': 15.0551, 'loss_cls': 1.3482, 'loss_mse': 0.036, 'loss_nce': 13.6709, 'load_time': 50.7633, 'process_time': 49.2367}
+[2020-11-22 15:07:05] INFO: ==> Iteration [  1][  75 /  196]: {'prec_cls': 34.388, 'loss': 15.0738, 'loss_cls': 1.3483, 'loss_mse': 0.0358, 'loss_nce': 13.6897, 'load_time': 50.6666, 'process_time': 49.3334}
+[2020-11-22 15:07:05] INFO: ==> Iteration [  1][  76 /  196]: {'prec_cls': 34.4251, 'loss': 15.0923, 'loss_cls': 1.3481, 'loss_mse': 0.0356, 'loss_nce': 13.7086, 'load_time': 50.7808, 'process_time': 49.2192}
+[2020-11-22 15:07:11] INFO: ==> Iteration [  1][  77 /  196]: {'prec_cls': 34.4708, 'loss': 15.1083, 'loss_cls': 1.3479, 'loss_mse': 0.0354, 'loss_nce': 13.725, 'load_time': 50.6987, 'process_time': 49.3013}
+[2020-11-22 15:07:11] INFO: ==> Iteration [  1][  78 /  196]: {'prec_cls': 34.4946, 'loss': 15.1235, 'loss_cls': 1.3477, 'loss_mse': 0.0353, 'loss_nce': 13.7405, 'load_time': 50.8028, 'process_time': 49.1972}
+[2020-11-22 15:07:17] INFO: ==> Iteration [  1][  79 /  196]: {'prec_cls': 34.5425, 'loss': 15.1397, 'loss_cls': 1.3475, 'loss_mse': 0.0351, 'loss_nce': 13.7571, 'load_time': 50.7115, 'process_time': 49.2885}
+[2020-11-22 15:07:18] INFO: ==> Iteration [  1][  80 /  196]: {'prec_cls': 34.5435, 'loss': 15.1572, 'loss_cls': 1.3473, 'loss_mse': 0.0349, 'loss_nce': 13.7749, 'load_time': 50.8185, 'process_time': 49.1815}
+[2020-11-22 15:07:23] INFO: ==> Iteration [  1][  81 /  196]: {'prec_cls': 34.5999, 'loss': 15.1721, 'loss_cls': 1.347, 'loss_mse': 0.0348, 'loss_nce': 13.7903, 'load_time': 50.7287, 'process_time': 49.2713}
+[2020-11-22 15:07:24] INFO: ==> Iteration [  1][  82 /  196]: {'prec_cls': 34.6573, 'loss': 15.186, 'loss_cls': 1.3467, 'loss_mse': 0.0346, 'loss_nce': 13.8046, 'load_time': 50.8339, 'process_time': 49.1661}
+[2020-11-22 15:07:29] INFO: ==> Iteration [  1][  83 /  196]: {'prec_cls': 34.6839, 'loss': 15.201, 'loss_cls': 1.3465, 'loss_mse': 0.0345, 'loss_nce': 13.8201, 'load_time': 50.7674, 'process_time': 49.2326}
+[2020-11-22 15:07:30] INFO: ==> Iteration [  1][  84 /  196]: {'prec_cls': 34.7174, 'loss': 15.2139, 'loss_cls': 1.3462, 'loss_mse': 0.0343, 'loss_nce': 13.8333, 'load_time': 50.8706, 'process_time': 49.1294}
+[2020-11-22 15:07:36] INFO: ==> Iteration [  1][  85 /  196]: {'prec_cls': 34.7547, 'loss': 15.2247, 'loss_cls': 1.346, 'loss_mse': 0.0342, 'loss_nce': 13.8445, 'load_time': 50.7831, 'process_time': 49.2169}
+[2020-11-22 15:07:36] INFO: ==> Iteration [  1][  86 /  196]: {'prec_cls': 34.7719, 'loss': 15.2361, 'loss_cls': 1.3458, 'loss_mse': 0.0341, 'loss_nce': 13.8561, 'load_time': 50.89, 'process_time': 49.11}
+[2020-11-22 15:07:42] INFO: ==> Iteration [  1][  87 /  196]: {'prec_cls': 34.7527, 'loss': 15.2477, 'loss_cls': 1.3461, 'loss_mse': 0.0339, 'loss_nce': 13.8677, 'load_time': 50.8053, 'process_time': 49.1947}
+[2020-11-22 15:07:43] INFO: ==> Iteration [  1][  88 /  196]: {'prec_cls': 34.7878, 'loss': 15.2543, 'loss_cls': 1.3457, 'loss_mse': 0.0338, 'loss_nce': 13.8749, 'load_time': 50.9008, 'process_time': 49.0992}
+[2020-11-22 15:07:48] INFO: ==> Iteration [  1][  89 /  196]: {'prec_cls': 34.8002, 'loss': 15.265, 'loss_cls': 1.3455, 'loss_mse': 0.0336, 'loss_nce': 13.8858, 'load_time': 50.8126, 'process_time': 49.1874}
+[2020-11-22 15:07:48] INFO: ==> Iteration [  1][  90 /  196]: {'prec_cls': 34.847, 'loss': 15.2756, 'loss_cls': 1.3452, 'loss_mse': 0.0335, 'loss_nce': 13.8969, 'load_time': 50.9115, 'process_time': 49.0885}
+[2020-11-22 15:07:53] INFO: ==> Iteration [  1][  91 /  196]: {'prec_cls': 34.8955, 'loss': 15.2852, 'loss_cls': 1.3449, 'loss_mse': 0.0334, 'loss_nce': 13.9069, 'load_time': 50.8314, 'process_time': 49.1686}
+[2020-11-22 15:07:54] INFO: ==> Iteration [  1][  92 /  196]: {'prec_cls': 34.9323, 'loss': 15.2952, 'loss_cls': 1.3447, 'loss_mse': 0.0333, 'loss_nce': 13.9172, 'load_time': 50.9194, 'process_time': 49.0806}
+[2020-11-22 15:08:00] INFO: ==> Iteration [  1][  93 /  196]: {'prec_cls': 34.9552, 'loss': 15.3029, 'loss_cls': 1.3444, 'loss_mse': 0.0332, 'loss_nce': 13.9252, 'load_time': 50.8411, 'process_time': 49.1589}
+[2020-11-22 15:08:01] INFO: ==> Iteration [  1][  94 /  196]: {'prec_cls': 34.9604, 'loss': 15.3103, 'loss_cls': 1.3443, 'loss_mse': 0.033, 'loss_nce': 13.9329, 'load_time': 50.9298, 'process_time': 49.0702}
+[2020-11-22 15:08:06] INFO: ==> Iteration [  1][  95 /  196]: {'prec_cls': 34.9861, 'loss': 15.3177, 'loss_cls': 1.3443, 'loss_mse': 0.0329, 'loss_nce': 13.9404, 'load_time': 50.8513, 'process_time': 49.1487}
+[2020-11-22 15:08:07] INFO: ==> Iteration [  1][  96 /  196]: {'prec_cls': 35.0001, 'loss': 15.3245, 'loss_cls': 1.3443, 'loss_mse': 0.0328, 'loss_nce': 13.9474, 'load_time': 50.9393, 'process_time': 49.0607}
+[2020-11-22 15:08:12] INFO: ==> Iteration [  1][  97 /  196]: {'prec_cls': 35.0007, 'loss': 15.3317, 'loss_cls': 1.3441, 'loss_mse': 0.0327, 'loss_nce': 13.9549, 'load_time': 50.8633, 'process_time': 49.1367}
+[2020-11-22 15:08:13] INFO: ==> Iteration [  1][  98 /  196]: {'prec_cls': 35.0147, 'loss': 15.3408, 'loss_cls': 1.3441, 'loss_mse': 0.0325, 'loss_nce': 13.9642, 'load_time': 50.9482, 'process_time': 49.0518}
+[2020-11-22 15:08:18] INFO: ==> Iteration [  1][  99 /  196]: {'prec_cls': 35.0177, 'loss': 15.35, 'loss_cls': 1.3441, 'loss_mse': 0.0324, 'loss_nce': 13.9734, 'load_time': 50.8708, 'process_time': 49.1292}
+[2020-11-22 15:08:19] INFO: ==> Iteration [  1][ 100 /  196]: {'prec_cls': 35.0161, 'loss': 15.3583, 'loss_cls': 1.3441, 'loss_mse': 0.0323, 'loss_nce': 13.9819, 'load_time': 50.9711, 'process_time': 49.0289}
+[2020-11-22 15:08:24] INFO: ==> Iteration [  1][ 101 /  196]: {'prec_cls': 35.0117, 'loss': 15.3657, 'loss_cls': 1.344, 'loss_mse': 0.0322, 'loss_nce': 13.9896, 'load_time': 50.8978, 'process_time': 49.1022}
+[2020-11-22 15:08:25] INFO: ==> Iteration [  1][ 102 /  196]: {'prec_cls': 35.0102, 'loss': 15.3724, 'loss_cls': 1.3438, 'loss_mse': 0.032, 'loss_nce': 13.9965, 'load_time': 50.9804, 'process_time': 49.0196}
+[2020-11-22 15:08:30] INFO: ==> Iteration [  1][ 103 /  196]: {'prec_cls': 35.0036, 'loss': 15.3799, 'loss_cls': 1.3438, 'loss_mse': 0.0319, 'loss_nce': 14.0042, 'load_time': 50.9085, 'process_time': 49.0915}
+[2020-11-22 15:08:31] INFO: ==> Iteration [  1][ 104 /  196]: {'prec_cls': 34.9844, 'loss': 15.3867, 'loss_cls': 1.3438, 'loss_mse': 0.0318, 'loss_nce': 14.0112, 'load_time': 50.9901, 'process_time': 49.0099}
+[2020-11-22 15:08:37] INFO: ==> Iteration [  1][ 105 /  196]: {'prec_cls': 35.0163, 'loss': 15.3931, 'loss_cls': 1.3436, 'loss_mse': 0.0317, 'loss_nce': 14.0178, 'load_time': 50.9159, 'process_time': 49.0841}
+[2020-11-22 15:08:37] INFO: ==> Iteration [  1][ 106 /  196]: {'prec_cls': 35.0162, 'loss': 15.4001, 'loss_cls': 1.3436, 'loss_mse': 0.0316, 'loss_nce': 14.0249, 'load_time': 51.0005, 'process_time': 48.9995}
+[2020-11-22 15:08:43] INFO: ==> Iteration [  1][ 107 /  196]: {'prec_cls': 35.0175, 'loss': 15.4054, 'loss_cls': 1.3436, 'loss_mse': 0.0314, 'loss_nce': 14.0304, 'load_time': 50.9318, 'process_time': 49.0682}
+[2020-11-22 15:08:43] INFO: ==> Iteration [  1][ 108 /  196]: {'prec_cls': 35.0315, 'loss': 15.4112, 'loss_cls': 1.3435, 'loss_mse': 0.0313, 'loss_nce': 14.0363, 'load_time': 51.0079, 'process_time': 48.9921}
+[2020-11-22 15:08:49] INFO: ==> Iteration [  1][ 109 /  196]: {'prec_cls': 35.0483, 'loss': 15.4155, 'loss_cls': 1.3436, 'loss_mse': 0.0312, 'loss_nce': 14.0407, 'load_time': 50.9394, 'process_time': 49.0606}
+[2020-11-22 15:08:49] INFO: ==> Iteration [  1][ 110 /  196]: {'prec_cls': 35.0493, 'loss': 15.421, 'loss_cls': 1.3436, 'loss_mse': 0.0311, 'loss_nce': 14.0463, 'load_time': 51.0153, 'process_time': 48.9847}
+[2020-11-22 15:08:55] INFO: ==> Iteration [  1][ 111 /  196]: {'prec_cls': 35.0423, 'loss': 15.4265, 'loss_cls': 1.3435, 'loss_mse': 0.031, 'loss_nce': 14.052, 'load_time': 50.9468, 'process_time': 49.0532}
+[2020-11-22 15:08:56] INFO: ==> Iteration [  1][ 112 /  196]: {'prec_cls': 35.0045, 'loss': 15.4314, 'loss_cls': 1.3438, 'loss_mse': 0.0309, 'loss_nce': 14.0567, 'load_time': 51.0198, 'process_time': 48.9802}
+[2020-11-22 15:09:02] INFO: ==> Iteration [  1][ 113 /  196]: {'prec_cls': 35.0258, 'loss': 15.4352, 'loss_cls': 1.3437, 'loss_mse': 0.0309, 'loss_nce': 14.0606, 'load_time': 50.9543, 'process_time': 49.0457}
+[2020-11-22 15:09:03] INFO: ==> Iteration [  1][ 114 /  196]: {'prec_cls': 35.0209, 'loss': 15.439, 'loss_cls': 1.3438, 'loss_mse': 0.0307, 'loss_nce': 14.0645, 'load_time': 51.0193, 'process_time': 48.9807}
+[2020-11-22 15:09:08] INFO: ==> Iteration [  1][ 115 /  196]: {'prec_cls': 35.0318, 'loss': 15.4428, 'loss_cls': 1.3439, 'loss_mse': 0.0306, 'loss_nce': 14.0682, 'load_time': 50.9461, 'process_time': 49.0539}
+[2020-11-22 15:09:09] INFO: ==> Iteration [  1][ 116 /  196]: {'prec_cls': 35.0228, 'loss': 15.4468, 'loss_cls': 1.3439, 'loss_mse': 0.0305, 'loss_nce': 14.0723, 'load_time': 51.0233, 'process_time': 48.9767}
+[2020-11-22 15:09:15] INFO: ==> Iteration [  1][ 117 /  196]: {'prec_cls': 35.0181, 'loss': 15.4493, 'loss_cls': 1.3439, 'loss_mse': 0.0305, 'loss_nce': 14.0749, 'load_time': 50.9599, 'process_time': 49.0401}
+[2020-11-22 15:09:16] INFO: ==> Iteration [  1][ 118 /  196]: {'prec_cls': 35.0329, 'loss': 15.4524, 'loss_cls': 1.3439, 'loss_mse': 0.0304, 'loss_nce': 14.078, 'load_time': 51.0121, 'process_time': 48.9879}
+[2020-11-22 15:09:22] INFO: ==> Iteration [  1][ 119 /  196]: {'prec_cls': 35.0487, 'loss': 15.4523, 'loss_cls': 1.3437, 'loss_mse': 0.0303, 'loss_nce': 14.0782, 'load_time': 50.9497, 'process_time': 49.0503}
+[2020-11-22 15:09:22] INFO: ==> Iteration [  1][ 120 /  196]: {'prec_cls': 35.0452, 'loss': 15.452, 'loss_cls': 1.3437, 'loss_mse': 0.0303, 'loss_nce': 14.078, 'load_time': 51.0331, 'process_time': 48.9669}
+[2020-11-22 15:09:28] INFO: ==> Iteration [  1][ 121 /  196]: {'prec_cls': 35.0513, 'loss': 15.4508, 'loss_cls': 1.3438, 'loss_mse': 0.0302, 'loss_nce': 14.0768, 'load_time': 50.9706, 'process_time': 49.0294}
+[2020-11-22 15:09:29] INFO: ==> Iteration [  1][ 122 /  196]: {'prec_cls': 35.0814, 'loss': 15.4474, 'loss_cls': 1.3436, 'loss_mse': 0.0301, 'loss_nce': 14.0737, 'load_time': 51.039, 'process_time': 48.961}
+[2020-11-22 15:09:35] INFO: ==> Iteration [  1][ 123 /  196]: {'prec_cls': 35.1102, 'loss': 15.444, 'loss_cls': 1.3436, 'loss_mse': 0.0301, 'loss_nce': 14.0704, 'load_time': 50.9879, 'process_time': 49.0121}
+[2020-11-22 15:09:35] INFO: ==> Iteration [  1][ 124 /  196]: {'prec_cls': 35.0984, 'loss': 15.4391, 'loss_cls': 1.3436, 'loss_mse': 0.03, 'loss_nce': 14.0655, 'load_time': 51.039, 'process_time': 48.961}
+[2020-11-22 15:09:41] INFO: ==> Iteration [  1][ 125 /  196]: {'prec_cls': 35.1074, 'loss': 15.4337, 'loss_cls': 1.3434, 'loss_mse': 0.03, 'loss_nce': 14.0603, 'load_time': 50.9863, 'process_time': 49.0137}
+[2020-11-22 15:09:42] INFO: ==> Iteration [  1][ 126 /  196]: {'prec_cls': 35.121, 'loss': 15.428, 'loss_cls': 1.3434, 'loss_mse': 0.0299, 'loss_nce': 14.0547, 'load_time': 51.0459, 'process_time': 48.9541}
+[2020-11-22 15:09:47] INFO: ==> Iteration [  1][ 127 /  196]: {'prec_cls': 35.1182, 'loss': 15.4217, 'loss_cls': 1.3435, 'loss_mse': 0.0298, 'loss_nce': 14.0485, 'load_time': 50.9846, 'process_time': 49.0154}
+[2020-11-22 15:09:48] INFO: ==> Iteration [  1][ 128 /  196]: {'prec_cls': 35.1261, 'loss': 15.4191, 'loss_cls': 1.3435, 'loss_mse': 0.0297, 'loss_nce': 14.0459, 'load_time': 51.0483, 'process_time': 48.9517}
+[2020-11-22 15:09:53] INFO: ==> Iteration [  1][ 129 /  196]: {'prec_cls': 35.1279, 'loss': 15.4164, 'loss_cls': 1.3434, 'loss_mse': 0.0297, 'loss_nce': 14.0433, 'load_time': 50.9918, 'process_time': 49.0082}
+[2020-11-22 15:09:54] INFO: ==> Iteration [  1][ 130 /  196]: {'prec_cls': 35.0973, 'loss': 15.4152, 'loss_cls': 1.3436, 'loss_mse': 0.0296, 'loss_nce': 14.0421, 'load_time': 51.049, 'process_time': 48.951}
+[2020-11-22 15:10:00] INFO: ==> Iteration [  1][ 131 /  196]: {'prec_cls': 35.1052, 'loss': 15.414, 'loss_cls': 1.3437, 'loss_mse': 0.0295, 'loss_nce': 14.0409, 'load_time': 50.9936, 'process_time': 49.0064}
+[2020-11-22 15:10:00] INFO: ==> Iteration [  1][ 132 /  196]: {'prec_cls': 35.1244, 'loss': 15.4139, 'loss_cls': 1.3437, 'loss_mse': 0.0294, 'loss_nce': 14.0407, 'load_time': 51.0593, 'process_time': 48.9407}
+[2020-11-22 15:10:06] INFO: ==> Iteration [  1][ 133 /  196]: {'prec_cls': 35.1291, 'loss': 15.4169, 'loss_cls': 1.3438, 'loss_mse': 0.0294, 'loss_nce': 14.0437, 'load_time': 50.9602, 'process_time': 49.0398}
+[2020-11-22 15:10:07] INFO: ==> Iteration [  1][ 134 /  196]: {'prec_cls': 35.1041, 'loss': 15.4224, 'loss_cls': 1.3441, 'loss_mse': 0.0293, 'loss_nce': 14.0489, 'load_time': 51.0229, 'process_time': 48.9771}
+[2020-11-22 15:10:12] INFO: ==> Iteration [  1][ 135 /  196]: {'prec_cls': 35.0904, 'loss': 15.4297, 'loss_cls': 1.3442, 'loss_mse': 0.0293, 'loss_nce': 14.0563, 'load_time': 50.9674, 'process_time': 49.0326}
+[2020-11-22 15:10:12] INFO: ==> Iteration [  1][ 136 /  196]: {'prec_cls': 35.083, 'loss': 15.4389, 'loss_cls': 1.3443, 'loss_mse': 0.0292, 'loss_nce': 14.0655, 'load_time': 51.0402, 'process_time': 48.9598}
+[2020-11-22 15:10:18] INFO: ==> Iteration [  1][ 137 /  196]: {'prec_cls': 35.0682, 'loss': 15.4493, 'loss_cls': 1.3443, 'loss_mse': 0.0291, 'loss_nce': 14.0759, 'load_time': 50.9856, 'process_time': 49.0144}
+[2020-11-22 15:10:18] INFO: ==> Iteration [  1][ 138 /  196]: {'prec_cls': 35.0459, 'loss': 15.4594, 'loss_cls': 1.3445, 'loss_mse': 0.0291, 'loss_nce': 14.0859, 'load_time': 51.0594, 'process_time': 48.9406}
+[2020-11-22 15:10:23] INFO: ==> Iteration [  1][ 139 /  196]: {'prec_cls': 35.0488, 'loss': 15.4703, 'loss_cls': 1.3445, 'loss_mse': 0.029, 'loss_nce': 14.0968, 'load_time': 51.0045, 'process_time': 48.9955}
+[2020-11-22 15:10:24] INFO: ==> Iteration [  1][ 140 /  196]: {'prec_cls': 35.0436, 'loss': 15.478, 'loss_cls': 1.3445, 'loss_mse': 0.029, 'loss_nce': 14.1046, 'load_time': 51.0646, 'process_time': 48.9354}
+[2020-11-22 15:10:29] INFO: ==> Iteration [  1][ 141 /  196]: {'prec_cls': 35.0475, 'loss': 15.4838, 'loss_cls': 1.3445, 'loss_mse': 0.0289, 'loss_nce': 14.1103, 'load_time': 51.0143, 'process_time': 48.9857}
+[2020-11-22 15:10:30] INFO: ==> Iteration [  1][ 142 /  196]: {'prec_cls': 35.0445, 'loss': 15.4883, 'loss_cls': 1.3446, 'loss_mse': 0.0289, 'loss_nce': 14.1148, 'load_time': 51.0725, 'process_time': 48.9275}
+[2020-11-22 15:10:35] INFO: ==> Iteration [  1][ 143 /  196]: {'prec_cls': 35.0378, 'loss': 15.4909, 'loss_cls': 1.3446, 'loss_mse': 0.0288, 'loss_nce': 14.1175, 'load_time': 51.0195, 'process_time': 48.9805}
+[2020-11-22 15:10:35] INFO: ==> Iteration [  1][ 144 /  196]: {'prec_cls': 35.06, 'loss': 15.4915, 'loss_cls': 1.3447, 'loss_mse': 0.0287, 'loss_nce': 14.118, 'load_time': 51.0903, 'process_time': 48.9097}
+[2020-11-22 15:10:41] INFO: ==> Iteration [  1][ 145 /  196]: {'prec_cls': 35.0677, 'loss': 15.4919, 'loss_cls': 1.3448, 'loss_mse': 0.0287, 'loss_nce': 14.1183, 'load_time': 51.0382, 'process_time': 48.9618}
+[2020-11-22 15:10:41] INFO: ==> Iteration [  1][ 146 /  196]: {'prec_cls': 35.0629, 'loss': 15.4897, 'loss_cls': 1.3449, 'loss_mse': 0.0287, 'loss_nce': 14.1161, 'load_time': 51.095, 'process_time': 48.905}
+[2020-11-22 15:10:47] INFO: ==> Iteration [  1][ 147 /  196]: {'prec_cls': 35.0815, 'loss': 15.4877, 'loss_cls': 1.3449, 'loss_mse': 0.0286, 'loss_nce': 14.1141, 'load_time': 51.0529, 'process_time': 48.9471}
+[2020-11-22 15:10:48] INFO: ==> Iteration [  1][ 148 /  196]: {'prec_cls': 35.0751, 'loss': 15.4841, 'loss_cls': 1.3449, 'loss_mse': 0.0287, 'loss_nce': 14.1105, 'load_time': 51.103, 'process_time': 48.897}
+[2020-11-22 15:10:53] INFO: ==> Iteration [  1][ 149 /  196]: {'prec_cls': 35.0982, 'loss': 15.4829, 'loss_cls': 1.3449, 'loss_mse': 0.0286, 'loss_nce': 14.1094, 'load_time': 51.0478, 'process_time': 48.9522}
+[2020-11-22 15:10:53] INFO: ==> Iteration [  1][ 150 /  196]: {'prec_cls': 35.0918, 'loss': 15.4808, 'loss_cls': 1.345, 'loss_mse': 0.0286, 'loss_nce': 14.1073, 'load_time': 51.1054, 'process_time': 48.8946}
+[2020-11-22 15:10:59] INFO: ==> Iteration [  1][ 151 /  196]: {'prec_cls': 35.0874, 'loss': 15.4808, 'loss_cls': 1.345, 'loss_mse': 0.0285, 'loss_nce': 14.1073, 'load_time': 51.0544, 'process_time': 48.9456}
+[2020-11-22 15:11:00] INFO: ==> Iteration [  1][ 152 /  196]: {'prec_cls': 35.0596, 'loss': 15.4814, 'loss_cls': 1.3451, 'loss_mse': 0.0285, 'loss_nce': 14.1079, 'load_time': 51.1105, 'process_time': 48.8895}
+[2020-11-22 15:11:05] INFO: ==> Iteration [  1][ 153 /  196]: {'prec_cls': 35.0768, 'loss': 15.4835, 'loss_cls': 1.3451, 'loss_mse': 0.0284, 'loss_nce': 14.1099, 'load_time': 51.0612, 'process_time': 48.9388}
+[2020-11-22 15:11:06] INFO: ==> Iteration [  1][ 154 /  196]: {'prec_cls': 35.0786, 'loss': 15.4866, 'loss_cls': 1.3452, 'loss_mse': 0.0283, 'loss_nce': 14.113, 'load_time': 51.1157, 'process_time': 48.8843}
+[2020-11-22 15:11:11] INFO: ==> Iteration [  1][ 155 /  196]: {'prec_cls': 35.0513, 'loss': 15.4926, 'loss_cls': 1.3454, 'loss_mse': 0.0283, 'loss_nce': 14.1189, 'load_time': 51.0686, 'process_time': 48.9314}
+[2020-11-22 15:11:12] INFO: ==> Iteration [  1][ 156 /  196]: {'prec_cls': 35.052, 'loss': 15.4975, 'loss_cls': 1.3454, 'loss_mse': 0.0282, 'loss_nce': 14.1239, 'load_time': 51.1225, 'process_time': 48.8775}
+[2020-11-22 15:11:17] INFO: ==> Iteration [  1][ 157 /  196]: {'prec_cls': 35.057, 'loss': 15.5039, 'loss_cls': 1.3454, 'loss_mse': 0.0281, 'loss_nce': 14.1303, 'load_time': 51.0737, 'process_time': 48.9263}
+[2020-11-22 15:11:18] INFO: ==> Iteration [  1][ 158 /  196]: {'prec_cls': 35.0608, 'loss': 15.5095, 'loss_cls': 1.3454, 'loss_mse': 0.0281, 'loss_nce': 14.136, 'load_time': 51.1269, 'process_time': 48.8731}
+[2020-11-22 15:11:23] INFO: ==> Iteration [  1][ 159 /  196]: {'prec_cls': 35.0626, 'loss': 15.516, 'loss_cls': 1.3454, 'loss_mse': 0.0281, 'loss_nce': 14.1426, 'load_time': 51.0756, 'process_time': 48.9244}
+[2020-11-22 15:11:24] INFO: ==> Iteration [  1][ 160 /  196]: {'prec_cls': 35.0751, 'loss': 15.5208, 'loss_cls': 1.3453, 'loss_mse': 0.028, 'loss_nce': 14.1475, 'load_time': 51.123, 'process_time': 48.877}
+[2020-11-22 15:11:29] INFO: ==> Iteration [  1][ 161 /  196]: {'prec_cls': 35.0813, 'loss': 15.5261, 'loss_cls': 1.3453, 'loss_mse': 0.028, 'loss_nce': 14.1529, 'load_time': 51.0896, 'process_time': 48.9104}
+[2020-11-22 15:11:30] INFO: ==> Iteration [  1][ 162 /  196]: {'prec_cls': 35.0857, 'loss': 15.5337, 'loss_cls': 1.3452, 'loss_mse': 0.028, 'loss_nce': 14.1605, 'load_time': 51.1442, 'process_time': 48.8558}
+[2020-11-22 15:11:35] INFO: ==> Iteration [  1][ 163 /  196]: {'prec_cls': 35.1014, 'loss': 15.5377, 'loss_cls': 1.3451, 'loss_mse': 0.0281, 'loss_nce': 14.1645, 'load_time': 51.0967, 'process_time': 48.9033}
+[2020-11-22 15:11:36] INFO: ==> Iteration [  1][ 164 /  196]: {'prec_cls': 35.1018, 'loss': 15.5416, 'loss_cls': 1.3451, 'loss_mse': 0.0282, 'loss_nce': 14.1683, 'load_time': 51.1574, 'process_time': 48.8426}
+[2020-11-22 15:11:41] INFO: ==> Iteration [  1][ 165 /  196]: {'prec_cls': 35.1136, 'loss': 15.5446, 'loss_cls': 1.345, 'loss_mse': 0.0281, 'loss_nce': 14.1714, 'load_time': 51.1098, 'process_time': 48.8902}
+[2020-11-22 15:11:41] INFO: ==> Iteration [  1][ 166 /  196]: {'prec_cls': 35.1186, 'loss': 15.5475, 'loss_cls': 1.3451, 'loss_mse': 0.0281, 'loss_nce': 14.1744, 'load_time': 51.1707, 'process_time': 48.8293}
+[2020-11-22 15:11:47] INFO: ==> Iteration [  1][ 167 /  196]: {'prec_cls': 35.1159, 'loss': 15.5515, 'loss_cls': 1.3451, 'loss_mse': 0.0281, 'loss_nce': 14.1784, 'load_time': 51.1247, 'process_time': 48.8753}
+[2020-11-22 15:11:47] INFO: ==> Iteration [  1][ 168 /  196]: {'prec_cls': 35.1243, 'loss': 15.5554, 'loss_cls': 1.345, 'loss_mse': 0.0281, 'loss_nce': 14.1823, 'load_time': 51.1832, 'process_time': 48.8168}
+[2020-11-22 15:11:53] INFO: ==> Iteration [  1][ 169 /  196]: {'prec_cls': 35.1187, 'loss': 15.5571, 'loss_cls': 1.345, 'loss_mse': 0.0281, 'loss_nce': 14.184, 'load_time': 51.1378, 'process_time': 48.8622}
+[2020-11-22 15:11:53] INFO: ==> Iteration [  1][ 170 /  196]: {'prec_cls': 35.1261, 'loss': 15.5586, 'loss_cls': 1.345, 'loss_mse': 0.0281, 'loss_nce': 14.1856, 'load_time': 51.1964, 'process_time': 48.8036}
+[2020-11-22 15:11:59] INFO: ==> Iteration [  1][ 171 /  196]: {'prec_cls': 35.1108, 'loss': 15.5583, 'loss_cls': 1.3451, 'loss_mse': 0.028, 'loss_nce': 14.1852, 'load_time': 51.1587, 'process_time': 48.8413}
+[2020-11-22 15:12:00] INFO: ==> Iteration [  1][ 172 /  196]: {'prec_cls': 35.1105, 'loss': 15.558, 'loss_cls': 1.3452, 'loss_mse': 0.028, 'loss_nce': 14.1849, 'load_time': 51.206, 'process_time': 48.794}
+[2020-11-22 15:12:05] INFO: ==> Iteration [  1][ 173 /  196]: {'prec_cls': 35.1094, 'loss': 15.5576, 'loss_cls': 1.3452, 'loss_mse': 0.028, 'loss_nce': 14.1843, 'load_time': 51.1623, 'process_time': 48.8377}
+[2020-11-22 15:12:06] INFO: ==> Iteration [  1][ 174 /  196]: {'prec_cls': 35.1094, 'loss': 15.5557, 'loss_cls': 1.3452, 'loss_mse': 0.028, 'loss_nce': 14.1824, 'load_time': 51.2195, 'process_time': 48.7805}
+[2020-11-22 15:12:11] INFO: ==> Iteration [  1][ 175 /  196]: {'prec_cls': 35.1113, 'loss': 15.5518, 'loss_cls': 1.3452, 'loss_mse': 0.028, 'loss_nce': 14.1786, 'load_time': 51.1754, 'process_time': 48.8246}
+[2020-11-22 15:12:11] INFO: ==> Iteration [  1][ 176 /  196]: {'prec_cls': 35.1121, 'loss': 15.5469, 'loss_cls': 1.3452, 'loss_mse': 0.0279, 'loss_nce': 14.1737, 'load_time': 51.2328, 'process_time': 48.7672}
+[2020-11-22 15:12:17] INFO: ==> Iteration [  1][ 177 /  196]: {'prec_cls': 35.1127, 'loss': 15.5416, 'loss_cls': 1.3453, 'loss_mse': 0.0279, 'loss_nce': 14.1685, 'load_time': 51.1899, 'process_time': 48.8101}
+[2020-11-22 15:12:17] INFO: ==> Iteration [  1][ 178 /  196]: {'prec_cls': 35.1154, 'loss': 15.5353, 'loss_cls': 1.3453, 'loss_mse': 0.0278, 'loss_nce': 14.1622, 'load_time': 51.2466, 'process_time': 48.7534}
+[2020-11-22 15:12:22] INFO: ==> Iteration [  1][ 179 /  196]: {'prec_cls': 35.114, 'loss': 15.5295, 'loss_cls': 1.3453, 'loss_mse': 0.0278, 'loss_nce': 14.1563, 'load_time': 51.203, 'process_time': 48.797}
+[2020-11-22 15:12:23] INFO: ==> Iteration [  1][ 180 /  196]: {'prec_cls': 35.1213, 'loss': 15.5234, 'loss_cls': 1.3453, 'loss_mse': 0.0278, 'loss_nce': 14.1503, 'load_time': 51.2574, 'process_time': 48.7426}
+[2020-11-22 15:12:28] INFO: ==> Iteration [  1][ 181 /  196]: {'prec_cls': 35.139, 'loss': 15.5183, 'loss_cls': 1.3453, 'loss_mse': 0.0277, 'loss_nce': 14.1453, 'load_time': 51.2119, 'process_time': 48.7881}
+[2020-11-22 15:12:28] INFO: ==> Iteration [  1][ 182 /  196]: {'prec_cls': 35.1281, 'loss': 15.5145, 'loss_cls': 1.3453, 'loss_mse': 0.0277, 'loss_nce': 14.1415, 'load_time': 51.2673, 'process_time': 48.7327}
+[2020-11-22 15:12:33] INFO: ==> Iteration [  1][ 183 /  196]: {'prec_cls': 35.1181, 'loss': 15.5108, 'loss_cls': 1.3454, 'loss_mse': 0.0277, 'loss_nce': 14.1377, 'load_time': 51.2244, 'process_time': 48.7756}
+[2020-11-22 15:12:34] INFO: ==> Iteration [  1][ 184 /  196]: {'prec_cls': 35.1151, 'loss': 15.5086, 'loss_cls': 1.3454, 'loss_mse': 0.0277, 'loss_nce': 14.1354, 'load_time': 51.277, 'process_time': 48.723}
+[2020-11-22 15:12:39] INFO: ==> Iteration [  1][ 185 /  196]: {'prec_cls': 35.1014, 'loss': 15.5067, 'loss_cls': 1.3454, 'loss_mse': 0.0278, 'loss_nce': 14.1335, 'load_time': 51.2362, 'process_time': 48.7638}
+[2020-11-22 15:12:39] INFO: ==> Iteration [  1][ 186 /  196]: {'prec_cls': 35.0919, 'loss': 15.5062, 'loss_cls': 1.3454, 'loss_mse': 0.0278, 'loss_nce': 14.133, 'load_time': 51.2786, 'process_time': 48.7214}
+[2020-11-22 15:12:45] INFO: ==> Iteration [  1][ 187 /  196]: {'prec_cls': 35.0797, 'loss': 15.5077, 'loss_cls': 1.3455, 'loss_mse': 0.0279, 'loss_nce': 14.1343, 'load_time': 51.2372, 'process_time': 48.7628}
+[2020-11-22 15:12:45] INFO: ==> Iteration [  1][ 188 /  196]: {'prec_cls': 35.075, 'loss': 15.5108, 'loss_cls': 1.3455, 'loss_mse': 0.0281, 'loss_nce': 14.1372, 'load_time': 51.2794, 'process_time': 48.7206}
+[2020-11-22 15:12:50] INFO: ==> Iteration [  1][ 189 /  196]: {'prec_cls': 35.0803, 'loss': 15.5157, 'loss_cls': 1.3455, 'loss_mse': 0.0283, 'loss_nce': 14.1419, 'load_time': 51.2385, 'process_time': 48.7615}
+[2020-11-22 15:12:51] INFO: ==> Iteration [  1][ 190 /  196]: {'prec_cls': 35.0835, 'loss': 15.5227, 'loss_cls': 1.3456, 'loss_mse': 0.0283, 'loss_nce': 14.1489, 'load_time': 51.2894, 'process_time': 48.7106}
+[2020-11-22 15:12:56] INFO: ==> Iteration [  1][ 191 /  196]: {'prec_cls': 35.0895, 'loss': 15.5299, 'loss_cls': 1.3456, 'loss_mse': 0.0285, 'loss_nce': 14.1558, 'load_time': 51.2471, 'process_time': 48.7529}
+[2020-11-22 15:12:57] INFO: ==> Iteration [  1][ 192 /  196]: {'prec_cls': 35.0871, 'loss': 15.5394, 'loss_cls': 1.3456, 'loss_mse': 0.0287, 'loss_nce': 14.1651, 'load_time': 51.2966, 'process_time': 48.7034}
+[2020-11-22 15:13:02] INFO: ==> Iteration [  1][ 193 /  196]: {'prec_cls': 35.0786, 'loss': 15.5491, 'loss_cls': 1.3456, 'loss_mse': 0.029, 'loss_nce': 14.1745, 'load_time': 51.256, 'process_time': 48.744}
+[2020-11-22 15:13:03] INFO: ==> Iteration [  1][ 194 /  196]: {'prec_cls': 35.078, 'loss': 15.5596, 'loss_cls': 1.3456, 'loss_mse': 0.0294, 'loss_nce': 14.1845, 'load_time': 51.3023, 'process_time': 48.6977}
+[2020-11-22 15:13:09] INFO: ==> Iteration [  1][ 195 /  196]: {'prec_cls': 35.0786, 'loss': 15.5693, 'loss_cls': 1.3456, 'loss_mse': 0.0295, 'loss_nce': 14.1942, 'load_time': 51.2558, 'process_time': 48.7442}
+[2020-11-22 15:13:09] INFO: ==> Iteration [  1][ 196 /  196]: {'prec_cls': 35.0583, 'loss': 15.5813, 'loss_cls': 1.3456, 'loss_mse': 0.0299, 'loss_nce': 14.2058, 'load_time': 51.2627, 'process_time': 48.7373}
+[2020-11-22 15:13:09] INFO: ==> Training stats: {'prec_cls': 35.0583, 'loss': 15.5813, 'loss_cls': 1.3456, 'loss_mse': 0.0299, 'loss_nce': 14.2058, 'load_time': 51.2627, 'process_time': 48.7373}
+[2020-11-22 15:13:11] INFO: 
+
+[2020-11-22 15:13:11] INFO: Evaluating: ImageNet_Decoupling_AlexNet
+[2020-11-22 15:13:11] INFO: ==> Dataset: imagenet_val [10000 images]
+[2020-11-22 15:13:11] INFO: ==> Iteration steps in one epoch: 20 [batch size 512]
+[2020-11-22 15:13:58] INFO: ==> Results: {'prec_rot': 39.0003, 'prec_inv': 25.0573, 'loss_rot': 1.3114, 'loss_inv': 1.3994, 'load_time': 50.0821, 'process_time': 49.9179}
+[2020-11-22 15:13:58] INFO: ==> Evaluation stats: {'prec_rot': 39.0003, 'prec_inv': 25.0573, 'loss_rot': 1.3114, 'loss_inv': 1.3994, 'load_time': 50.0821, 'process_time': 49.9179}
+[2020-11-22 15:13:58] INFO: 
+
+[2020-11-22 15:13:58] INFO: Training epoch [  2 / 200]
+[2020-11-22 15:13:58] INFO: ==> Set to feature optimizer lr = 0.0100000000
+[2020-11-22 15:13:58] INFO: ==> Set to classifier optimizer lr = 0.0100000000
+[2020-11-22 15:13:58] INFO: ==> Set to norm optimizer lr = 0.0100000000
+[2020-11-22 15:13:58] INFO: Training: ImageNet_Decoupling_AlexNet
+[2020-11-22 15:13:58] INFO: ==> Dataset: imagenet_train [100000 images]
+[2020-11-22 15:13:58] INFO: ==> Iteration steps in one epoch: 196 [batch size 512]
+[2020-11-22 15:14:00] INFO: ==> Iteration [  2][   1 /  196]: {'prec_cls': 34.9609, 'loss': 16.5552, 'loss_cls': 1.3443, 'loss_mse': 0.0462, 'loss_nce': 15.1646, 'load_time': 42.2098, 'process_time': 57.7902}
+[2020-11-22 15:14:01] INFO: ==> Iteration [  2][   2 /  196]: {'prec_cls': 35.8643, 'loss': 16.4018, 'loss_cls': 1.3436, 'loss_mse': 0.0449, 'loss_nce': 15.0133, 'load_time': 50.5252, 'process_time': 49.4748}
+[2020-11-22 15:14:02] INFO: ==> Iteration [  2][   3 /  196]: {'prec_cls': 35.612, 'loss': 16.4453, 'loss_cls': 1.3485, 'loss_mse': 0.0591, 'loss_nce': 15.0377, 'load_time': 49.0781, 'process_time': 50.9219}
+[2020-11-22 15:14:02] INFO: ==> Iteration [  2][   4 /  196]: {'prec_cls': 36.499, 'loss': 16.3877, 'loss_cls': 1.3416, 'loss_mse': 0.063, 'loss_nce': 14.9832, 'load_time': 51.6847, 'process_time': 48.3153}
+[2020-11-22 15:14:03] INFO: ==> Iteration [  2][   5 /  196]: {'prec_cls': 36.2207, 'loss': 16.4511, 'loss_cls': 1.3398, 'loss_mse': 0.0642, 'loss_nce': 15.0471, 'load_time': 50.6786, 'process_time': 49.3214}
+[2020-11-22 15:14:04] INFO: ==> Iteration [  2][   6 /  196]: {'prec_cls': 36.5316, 'loss': 16.5035, 'loss_cls': 1.3396, 'loss_mse': 0.0687, 'loss_nce': 15.0952, 'load_time': 52.2154, 'process_time': 47.7846}
+[2020-11-22 15:14:05] INFO: ==> Iteration [  2][   7 /  196]: {'prec_cls': 36.4816, 'loss': 16.5214, 'loss_cls': 1.3387, 'loss_mse': 0.0689, 'loss_nce': 15.1139, 'load_time': 51.4131, 'process_time': 48.5869}
+[2020-11-22 15:14:05] INFO: ==> Iteration [  2][   8 /  196]: {'prec_cls': 36.6943, 'loss': 16.5373, 'loss_cls': 1.3363, 'loss_mse': 0.07, 'loss_nce': 15.131, 'load_time': 52.4952, 'process_time': 47.5048}
+[2020-11-22 15:14:06] INFO: ==> Iteration [  2][   9 /  196]: {'prec_cls': 36.3553, 'loss': 16.5828, 'loss_cls': 1.3405, 'loss_mse': 0.0707, 'loss_nce': 15.1716, 'load_time': 51.8077, 'process_time': 48.1923}
+[2020-11-22 15:14:07] INFO: ==> Iteration [  2][  10 /  196]: {'prec_cls': 36.4453, 'loss': 16.6193, 'loss_cls': 1.3381, 'loss_mse': 0.0687, 'loss_nce': 15.2126, 'load_time': 52.5787, 'process_time': 47.4213}
+[2020-11-22 15:14:08] INFO: ==> Iteration [  2][  11 /  196]: {'prec_cls': 36.4835, 'loss': 16.6229, 'loss_cls': 1.3387, 'loss_mse': 0.0689, 'loss_nce': 15.2154, 'load_time': 52.0358, 'process_time': 47.9642}
+[2020-11-22 15:14:08] INFO: ==> Iteration [  2][  12 /  196]: {'prec_cls': 36.5519, 'loss': 16.6695, 'loss_cls': 1.3386, 'loss_mse': 0.066, 'loss_nce': 15.2648, 'load_time': 52.495, 'process_time': 47.505}
+[2020-11-22 15:14:09] INFO: ==> Iteration [  2][  13 /  196]: {'prec_cls': 36.745, 'loss': 16.7066, 'loss_cls': 1.3374, 'loss_mse': 0.0641, 'loss_nce': 15.305, 'load_time': 51.999, 'process_time': 48.001}
+[2020-11-22 15:14:10] INFO: ==> Iteration [  2][  14 /  196]: {'prec_cls': 36.9455, 'loss': 16.7202, 'loss_cls': 1.3361, 'loss_mse': 0.0622, 'loss_nce': 15.322, 'load_time': 52.5895, 'process_time': 47.4105}
+[2020-11-22 15:14:11] INFO: ==> Iteration [  2][  15 /  196]: {'prec_cls': 36.7611, 'loss': 16.7458, 'loss_cls': 1.3372, 'loss_mse': 0.0604, 'loss_nce': 15.3482, 'load_time': 52.1766, 'process_time': 47.8234}
+[2020-11-22 15:14:11] INFO: ==> Iteration [  2][  16 /  196]: {'prec_cls': 36.7798, 'loss': 16.7876, 'loss_cls': 1.3357, 'loss_mse': 0.0589, 'loss_nce': 15.393, 'load_time': 52.556, 'process_time': 47.444}
+[2020-11-22 15:14:12] INFO: ==> Iteration [  2][  17 /  196]: {'prec_cls': 36.8049, 'loss': 16.8062, 'loss_cls': 1.3359, 'loss_mse': 0.0573, 'loss_nce': 15.413, 'load_time': 51.9816, 'process_time': 48.0184}
+[2020-11-22 15:14:13] INFO: ==> Iteration [  2][  18 /  196]: {'prec_cls': 36.8462, 'loss': 16.8107, 'loss_cls': 1.3357, 'loss_mse': 0.0559, 'loss_nce': 15.4191, 'load_time': 52.3401, 'process_time': 47.6599}
+[2020-11-22 15:14:14] INFO: ==> Iteration [  2][  19 /  196]: {'prec_cls': 36.6828, 'loss': 16.8029, 'loss_cls': 1.3369, 'loss_mse': 0.0546, 'loss_nce': 15.4115, 'load_time': 52.0282, 'process_time': 47.9718}
+[2020-11-22 15:14:15] INFO: ==> Iteration [  2][  20 /  196]: {'prec_cls': 36.4966, 'loss': 16.8014, 'loss_cls': 1.3383, 'loss_mse': 0.0534, 'loss_nce': 15.4097, 'load_time': 52.3302, 'process_time': 47.6698}
+[2020-11-22 15:14:16] INFO: ==> Iteration [  2][  21 /  196]: {'prec_cls': 36.4211, 'loss': 16.7943, 'loss_cls': 1.3386, 'loss_mse': 0.0523, 'loss_nce': 15.4033, 'load_time': 51.9279, 'process_time': 48.0721}
+[2020-11-22 15:14:16] INFO: ==> Iteration [  2][  22 /  196]: {'prec_cls': 36.3237, 'loss': 16.7612, 'loss_cls': 1.3395, 'loss_mse': 0.0512, 'loss_nce': 15.3705, 'load_time': 52.2108, 'process_time': 47.7892}
+[2020-11-22 15:14:17] INFO: ==> Iteration [  2][  23 /  196]: {'prec_cls': 36.2432, 'loss': 16.7516, 'loss_cls': 1.3401, 'loss_mse': 0.0502, 'loss_nce': 15.3612, 'load_time': 51.859, 'process_time': 48.141}
+[2020-11-22 15:14:18] INFO: ==> Iteration [  2][  24 /  196]: {'prec_cls': 36.1857, 'loss': 16.7414, 'loss_cls': 1.3402, 'loss_mse': 0.0493, 'loss_nce': 15.3519, 'load_time': 52.1486, 'process_time': 47.8514}
+[2020-11-22 15:14:19] INFO: ==> Iteration [  2][  25 /  196]: {'prec_cls': 36.1641, 'loss': 16.7433, 'loss_cls': 1.3401, 'loss_mse': 0.0486, 'loss_nce': 15.3546, 'load_time': 51.888, 'process_time': 48.112}
+[2020-11-22 15:14:19] INFO: ==> Iteration [  2][  26 /  196]: {'prec_cls': 36.1272, 'loss': 16.7408, 'loss_cls': 1.3402, 'loss_mse': 0.0479, 'loss_nce': 15.3527, 'load_time': 52.0381, 'process_time': 47.9619}
+[2020-11-22 15:14:20] INFO: ==> Iteration [  2][  27 /  196]: {'prec_cls': 36.0207, 'loss': 16.7323, 'loss_cls': 1.3409, 'loss_mse': 0.0471, 'loss_nce': 15.3442, 'load_time': 51.7056, 'process_time': 48.2944}
+[2020-11-22 15:14:21] INFO: ==> Iteration [  2][  28 /  196]: {'prec_cls': 35.9148, 'loss': 16.7362, 'loss_cls': 1.3417, 'loss_mse': 0.0464, 'loss_nce': 15.348, 'load_time': 51.9554, 'process_time': 48.0446}
+[2020-11-22 15:14:22] INFO: ==> Iteration [  2][  29 /  196]: {'prec_cls': 35.8752, 'loss': 16.7397, 'loss_cls': 1.342, 'loss_mse': 0.0459, 'loss_nce': 15.3519, 'load_time': 51.7689, 'process_time': 48.2311}
+[2020-11-22 15:14:22] INFO: ==> Iteration [  2][  30 /  196]: {'prec_cls': 35.8122, 'loss': 16.7551, 'loss_cls': 1.3423, 'loss_mse': 0.0454, 'loss_nce': 15.3675, 'load_time': 51.695, 'process_time': 48.305}
+[2020-11-22 15:14:23] INFO: ==> Iteration [  2][  31 /  196]: {'prec_cls': 35.7359, 'loss': 16.7592, 'loss_cls': 1.3426, 'loss_mse': 0.0448, 'loss_nce': 15.3718, 'load_time': 51.5281, 'process_time': 48.4719}
+[2020-11-22 15:14:24] INFO: ==> Iteration [  2][  32 /  196]: {'prec_cls': 35.5652, 'loss': 16.7801, 'loss_cls': 1.3435, 'loss_mse': 0.0443, 'loss_nce': 15.3923, 'load_time': 51.3197, 'process_time': 48.6803}
+[2020-11-22 15:14:24] INFO: ==> Iteration [  2][  33 /  196]: {'prec_cls': 35.4211, 'loss': 16.7748, 'loss_cls': 1.3444, 'loss_mse': 0.0438, 'loss_nce': 15.3866, 'load_time': 51.171, 'process_time': 48.829}
+[2020-11-22 15:14:25] INFO: ==> Iteration [  2][  34 /  196]: {'prec_cls': 35.2912, 'loss': 16.7688, 'loss_cls': 1.3452, 'loss_mse': 0.0432, 'loss_nce': 15.3804, 'load_time': 51.0309, 'process_time': 48.9691}
+[2020-11-22 15:14:26] INFO: ==> Iteration [  2][  35 /  196]: {'prec_cls': 35.2958, 'loss': 16.7635, 'loss_cls': 1.3453, 'loss_mse': 0.0427, 'loss_nce': 15.3755, 'load_time': 51.036, 'process_time': 48.964}
+[2020-11-22 15:14:27] INFO: ==> Iteration [  2][  36 /  196]: {'prec_cls': 35.14, 'loss': 16.7521, 'loss_cls': 1.3465, 'loss_mse': 0.0422, 'loss_nce': 15.3634, 'load_time': 50.9004, 'process_time': 49.0996}
+[2020-11-22 15:14:28] INFO: ==> Iteration [  2][  37 /  196]: {'prec_cls': 35.1061, 'loss': 16.7401, 'loss_cls': 1.3468, 'loss_mse': 0.0417, 'loss_nce': 15.3516, 'load_time': 51.116, 'process_time': 48.884}
+[2020-11-22 15:14:29] INFO: ==> Iteration [  2][  38 /  196]: {'prec_cls': 35.1113, 'loss': 16.7164, 'loss_cls': 1.3468, 'loss_mse': 0.0413, 'loss_nce': 15.3283, 'load_time': 50.9794, 'process_time': 49.0206}
+[2020-11-22 15:14:29] INFO: ==> Iteration [  2][  39 /  196]: {'prec_cls': 35.0348, 'loss': 16.6984, 'loss_cls': 1.3474, 'loss_mse': 0.0409, 'loss_nce': 15.3101, 'load_time': 50.9773, 'process_time': 49.0227}
+[2020-11-22 15:14:30] INFO: ==> Iteration [  2][  40 /  196]: {'prec_cls': 34.9902, 'loss': 16.6752, 'loss_cls': 1.3475, 'loss_mse': 0.0405, 'loss_nce': 15.2872, 'load_time': 50.8467, 'process_time': 49.1533}
+[2020-11-22 15:14:31] INFO: ==> Iteration [  2][  41 /  196]: {'prec_cls': 34.905, 'loss': 16.6514, 'loss_cls': 1.3479, 'loss_mse': 0.0401, 'loss_nce': 15.2634, 'load_time': 50.7916, 'process_time': 49.2084}
+[2020-11-22 15:14:32] INFO: ==> Iteration [  2][  42 /  196]: {'prec_cls': 34.7796, 'loss': 16.6188, 'loss_cls': 1.3486, 'loss_mse': 0.0397, 'loss_nce': 15.2305, 'load_time': 50.6726, 'process_time': 49.3274}
+[2020-11-22 15:14:32] INFO: ==> Iteration [  2][  43 /  196]: {'prec_cls': 34.7134, 'loss': 16.5925, 'loss_cls': 1.3489, 'loss_mse': 0.0394, 'loss_nce': 15.2041, 'load_time': 50.7511, 'process_time': 49.2489}
+[2020-11-22 15:14:33] INFO: ==> Iteration [  2][  44 /  196]: {'prec_cls': 34.6469, 'loss': 16.5649, 'loss_cls': 1.3492, 'loss_mse': 0.0391, 'loss_nce': 15.1766, 'load_time': 50.6338, 'process_time': 49.3662}
+[2020-11-22 15:14:34] INFO: ==> Iteration [  2][  45 /  196]: {'prec_cls': 34.6734, 'loss': 16.5397, 'loss_cls': 1.3491, 'loss_mse': 0.0388, 'loss_nce': 15.1519, 'load_time': 50.6308, 'process_time': 49.3692}
+[2020-11-22 15:14:35] INFO: ==> Iteration [  2][  46 /  196]: {'prec_cls': 34.6351, 'loss': 16.513, 'loss_cls': 1.3493, 'loss_mse': 0.0385, 'loss_nce': 15.1252, 'load_time': 50.5062, 'process_time': 49.4938}
+[2020-11-22 15:14:35] INFO: ==> Iteration [  2][  47 /  196]: {'prec_cls': 34.6472, 'loss': 16.4988, 'loss_cls': 1.3493, 'loss_mse': 0.0382, 'loss_nce': 15.1114, 'load_time': 50.4039, 'process_time': 49.5961}
+[2020-11-22 15:14:36] INFO: ==> Iteration [  2][  48 /  196]: {'prec_cls': 34.6212, 'loss': 16.4813, 'loss_cls': 1.3494, 'loss_mse': 0.0379, 'loss_nce': 15.094, 'load_time': 50.316, 'process_time': 49.684}
+[2020-11-22 15:14:37] INFO: ==> Iteration [  2][  49 /  196]: {'prec_cls': 34.6371, 'loss': 16.4659, 'loss_cls': 1.3495, 'loss_mse': 0.0376, 'loss_nce': 15.0788, 'load_time': 50.3429, 'process_time': 49.6571}
+[2020-11-22 15:14:38] INFO: ==> Iteration [  2][  50 /  196]: {'prec_cls': 34.6846, 'loss': 16.4481, 'loss_cls': 1.3493, 'loss_mse': 0.0374, 'loss_nce': 15.0614, 'load_time': 50.2627, 'process_time': 49.7373}
+[2020-11-22 15:14:38] INFO: ==> Iteration [  2][  51 /  196]: {'prec_cls': 34.6996, 'loss': 16.4413, 'loss_cls': 1.3492, 'loss_mse': 0.0371, 'loss_nce': 15.0549, 'load_time': 50.2241, 'process_time': 49.7759}
+[2020-11-22 15:14:39] INFO: ==> Iteration [  2][  52 /  196]: {'prec_cls': 34.7196, 'loss': 16.4362, 'loss_cls': 1.3493, 'loss_mse': 0.0369, 'loss_nce': 15.05, 'load_time': 50.1475, 'process_time': 49.8525}
+[2020-11-22 15:14:40] INFO: ==> Iteration [  2][  53 /  196]: {'prec_cls': 34.7232, 'loss': 16.4386, 'loss_cls': 1.3489, 'loss_mse': 0.0366, 'loss_nce': 15.0531, 'load_time': 50.0552, 'process_time': 49.9448}
+[2020-11-22 15:14:41] INFO: ==> Iteration [  2][  54 /  196]: {'prec_cls': 34.7349, 'loss': 16.4359, 'loss_cls': 1.3489, 'loss_mse': 0.0364, 'loss_nce': 15.0506, 'load_time': 49.9848, 'process_time': 50.0152}
+[2020-11-22 15:14:41] INFO: ==> Iteration [  2][  55 /  196]: {'prec_cls': 34.7745, 'loss': 16.4384, 'loss_cls': 1.3487, 'loss_mse': 0.0362, 'loss_nce': 15.0535, 'load_time': 49.9052, 'process_time': 50.0948}
+[2020-11-22 15:14:42] INFO: ==> Iteration [  2][  56 /  196]: {'prec_cls': 34.7874, 'loss': 16.4417, 'loss_cls': 1.3487, 'loss_mse': 0.036, 'loss_nce': 15.057, 'load_time': 49.8301, 'process_time': 50.1699}
+[2020-11-22 15:14:43] INFO: ==> Iteration [  2][  57 /  196]: {'prec_cls': 34.7768, 'loss': 16.4476, 'loss_cls': 1.3488, 'loss_mse': 0.0358, 'loss_nce': 15.063, 'load_time': 49.7514, 'process_time': 50.2486}
+[2020-11-22 15:14:44] INFO: ==> Iteration [  2][  58 /  196]: {'prec_cls': 34.7892, 'loss': 16.4601, 'loss_cls': 1.3487, 'loss_mse': 0.0356, 'loss_nce': 15.0758, 'load_time': 49.6982, 'process_time': 50.3018}
+[2020-11-22 15:14:45] INFO: ==> Iteration [  2][  59 /  196]: {'prec_cls': 34.8244, 'loss': 16.469, 'loss_cls': 1.3486, 'loss_mse': 0.0353, 'loss_nce': 15.0851, 'load_time': 49.6442, 'process_time': 50.3558}
+[2020-11-22 15:14:45] INFO: ==> Iteration [  2][  60 /  196]: {'prec_cls': 34.8324, 'loss': 16.4814, 'loss_cls': 1.3485, 'loss_mse': 0.0352, 'loss_nce': 15.0976, 'load_time': 49.5993, 'process_time': 50.4007}
+[2020-11-22 15:14:46] INFO: ==> Iteration [  2][  61 /  196]: {'prec_cls': 34.8369, 'loss': 16.5045, 'loss_cls': 1.3483, 'loss_mse': 0.035, 'loss_nce': 15.1212, 'load_time': 49.5538, 'process_time': 50.4462}
+[2020-11-22 15:14:47] INFO: ==> Iteration [  2][  62 /  196]: {'prec_cls': 34.8129, 'loss': 16.5255, 'loss_cls': 1.3484, 'loss_mse': 0.0349, 'loss_nce': 15.1422, 'load_time': 49.5246, 'process_time': 50.4754}
+[2020-11-22 15:14:48] INFO: ==> Iteration [  2][  63 /  196]: {'prec_cls': 34.7819, 'loss': 16.5508, 'loss_cls': 1.3487, 'loss_mse': 0.0348, 'loss_nce': 15.1674, 'load_time': 49.4676, 'process_time': 50.5324}
+[2020-11-22 15:14:48] INFO: ==> Iteration [  2][  64 /  196]: {'prec_cls': 34.7435, 'loss': 16.5772, 'loss_cls': 1.3489, 'loss_mse': 0.0346, 'loss_nce': 15.1937, 'load_time': 49.4248, 'process_time': 50.5752}
+[2020-11-22 15:14:49] INFO: ==> Iteration [  2][  65 /  196]: {'prec_cls': 34.7739, 'loss': 16.6019, 'loss_cls': 1.3487, 'loss_mse': 0.0345, 'loss_nce': 15.2187, 'load_time': 49.3738, 'process_time': 50.6262}
+[2020-11-22 15:14:50] INFO: ==> Iteration [  2][  66 /  196]: {'prec_cls': 34.8026, 'loss': 16.6293, 'loss_cls': 1.3484, 'loss_mse': 0.0343, 'loss_nce': 15.2466, 'load_time': 49.321, 'process_time': 50.679}
+[2020-11-22 15:14:51] INFO: ==> Iteration [  2][  67 /  196]: {'prec_cls': 34.8166, 'loss': 16.6549, 'loss_cls': 1.3483, 'loss_mse': 0.0342, 'loss_nce': 15.2725, 'load_time': 49.2702, 'process_time': 50.7298}
+[2020-11-22 15:14:52] INFO: ==> Iteration [  2][  68 /  196]: {'prec_cls': 34.8044, 'loss': 16.6771, 'loss_cls': 1.3483, 'loss_mse': 0.0341, 'loss_nce': 15.2947, 'load_time': 49.2322, 'process_time': 50.7678}
+[2020-11-22 15:14:52] INFO: ==> Iteration [  2][  69 /  196]: {'prec_cls': 34.8152, 'loss': 16.6968, 'loss_cls': 1.3481, 'loss_mse': 0.0339, 'loss_nce': 15.3148, 'load_time': 49.2697, 'process_time': 50.7303}
+[2020-11-22 15:14:53] INFO: ==> Iteration [  2][  70 /  196]: {'prec_cls': 34.8444, 'loss': 16.7138, 'loss_cls': 1.3478, 'loss_mse': 0.0338, 'loss_nce': 15.3323, 'load_time': 49.2293, 'process_time': 50.7707}
+[2020-11-22 15:14:54] INFO: ==> Iteration [  2][  71 /  196]: {'prec_cls': 34.8392, 'loss': 16.7267, 'loss_cls': 1.3476, 'loss_mse': 0.0336, 'loss_nce': 15.3454, 'load_time': 49.3538, 'process_time': 50.6462}
+[2020-11-22 15:14:55] INFO: ==> Iteration [  2][  72 /  196]: {'prec_cls': 34.866, 'loss': 16.7416, 'loss_cls': 1.3475, 'loss_mse': 0.0335, 'loss_nce': 15.3606, 'load_time': 49.3118, 'process_time': 50.6882}
+[2020-11-22 15:14:55] INFO: ==> Iteration [  2][  73 /  196]: {'prec_cls': 34.8947, 'loss': 16.7504, 'loss_cls': 1.3472, 'loss_mse': 0.0334, 'loss_nce': 15.3698, 'load_time': 49.4417, 'process_time': 50.5583}
+[2020-11-22 15:14:56] INFO: ==> Iteration [  2][  74 /  196]: {'prec_cls': 34.9629, 'loss': 16.7563, 'loss_cls': 1.3467, 'loss_mse': 0.0334, 'loss_nce': 15.3762, 'load_time': 49.3684, 'process_time': 50.6316}
+[2020-11-22 15:14:57] INFO: ==> Iteration [  2][  75 /  196]: {'prec_cls': 34.9701, 'loss': 16.7602, 'loss_cls': 1.3467, 'loss_mse': 0.0333, 'loss_nce': 15.3803, 'load_time': 49.4921, 'process_time': 50.5079}
+[2020-11-22 15:14:58] INFO: ==> Iteration [  2][  76 /  196]: {'prec_cls': 34.9931, 'loss': 16.7594, 'loss_cls': 1.3465, 'loss_mse': 0.0332, 'loss_nce': 15.3797, 'load_time': 49.4234, 'process_time': 50.5766}
+[2020-11-22 15:14:58] INFO: ==> Iteration [  2][  77 /  196]: {'prec_cls': 35.0161, 'loss': 16.7555, 'loss_cls': 1.3463, 'loss_mse': 0.0331, 'loss_nce': 15.3761, 'load_time': 49.5701, 'process_time': 50.4299}
+[2020-11-22 15:14:59] INFO: ==> Iteration [  2][  78 /  196]: {'prec_cls': 35.0129, 'loss': 16.754, 'loss_cls': 1.3462, 'loss_mse': 0.033, 'loss_nce': 15.3747, 'load_time': 49.5282, 'process_time': 50.4718}
+[2020-11-22 15:15:00] INFO: ==> Iteration [  2][  79 /  196]: {'prec_cls': 35.0722, 'loss': 16.7453, 'loss_cls': 1.346, 'loss_mse': 0.0329, 'loss_nce': 15.3664, 'load_time': 49.6581, 'process_time': 50.3419}
+[2020-11-22 15:15:01] INFO: ==> Iteration [  2][  80 /  196]: {'prec_cls': 35.0836, 'loss': 16.7393, 'loss_cls': 1.3458, 'loss_mse': 0.0329, 'loss_nce': 15.3606, 'load_time': 49.5949, 'process_time': 50.4051}
+[2020-11-22 15:15:01] INFO: ==> Iteration [  2][  81 /  196]: {'prec_cls': 35.0676, 'loss': 16.7351, 'loss_cls': 1.3458, 'loss_mse': 0.0328, 'loss_nce': 15.3565, 'load_time': 49.7149, 'process_time': 50.2851}
+[2020-11-22 15:15:02] INFO: ==> Iteration [  2][  82 /  196]: {'prec_cls': 35.0509, 'loss': 16.7325, 'loss_cls': 1.3457, 'loss_mse': 0.0327, 'loss_nce': 15.3541, 'load_time': 49.6536, 'process_time': 50.3464}
+[2020-11-22 15:15:03] INFO: ==> Iteration [  2][  83 /  196]: {'prec_cls': 34.9945, 'loss': 16.7244, 'loss_cls': 1.346, 'loss_mse': 0.0326, 'loss_nce': 15.3458, 'load_time': 49.763, 'process_time': 50.237}
+[2020-11-22 15:15:04] INFO: ==> Iteration [  2][  84 /  196]: {'prec_cls': 34.9784, 'loss': 16.7207, 'loss_cls': 1.3461, 'loss_mse': 0.0325, 'loss_nce': 15.3421, 'load_time': 49.718, 'process_time': 50.282}
+[2020-11-22 15:15:04] INFO: ==> Iteration [  2][  85 /  196]: {'prec_cls': 34.9202, 'loss': 16.7157, 'loss_cls': 1.3465, 'loss_mse': 0.0324, 'loss_nce': 15.3368, 'load_time': 49.8223, 'process_time': 50.1777}
+[2020-11-22 15:15:05] INFO: ==> Iteration [  2][  86 /  196]: {'prec_cls': 34.9201, 'loss': 16.7099, 'loss_cls': 1.3463, 'loss_mse': 0.0324, 'loss_nce': 15.3312, 'load_time': 49.7574, 'process_time': 50.2426}
+[2020-11-22 15:15:06] INFO: ==> Iteration [  2][  87 /  196]: {'prec_cls': 34.9222, 'loss': 16.7061, 'loss_cls': 1.3461, 'loss_mse': 0.0324, 'loss_nce': 15.3276, 'load_time': 49.8561, 'process_time': 50.1439}
+[2020-11-22 15:15:07] INFO: ==> Iteration [  2][  88 /  196]: {'prec_cls': 34.9021, 'loss': 16.7011, 'loss_cls': 1.3461, 'loss_mse': 0.0324, 'loss_nce': 15.3226, 'load_time': 49.8019, 'process_time': 50.1981}
+[2020-11-22 15:15:07] INFO: ==> Iteration [  2][  89 /  196]: {'prec_cls': 34.8781, 'loss': 16.6944, 'loss_cls': 1.3462, 'loss_mse': 0.0323, 'loss_nce': 15.3159, 'load_time': 49.912, 'process_time': 50.088}
+[2020-11-22 15:15:08] INFO: ==> Iteration [  2][  90 /  196]: {'prec_cls': 34.8579, 'loss': 16.6894, 'loss_cls': 1.3463, 'loss_mse': 0.0322, 'loss_nce': 15.3108, 'load_time': 49.8492, 'process_time': 50.1508}
+[2020-11-22 15:15:09] INFO: ==> Iteration [  2][  91 /  196]: {'prec_cls': 34.8204, 'loss': 16.6855, 'loss_cls': 1.3464, 'loss_mse': 0.0323, 'loss_nce': 15.3068, 'load_time': 49.953, 'process_time': 50.047}
+[2020-11-22 15:15:10] INFO: ==> Iteration [  2][  92 /  196]: {'prec_cls': 34.8118, 'loss': 16.6833, 'loss_cls': 1.3466, 'loss_mse': 0.0322, 'loss_nce': 15.3045, 'load_time': 49.8911, 'process_time': 50.1089}
+[2020-11-22 15:15:10] INFO: ==> Iteration [  2][  93 /  196]: {'prec_cls': 34.7824, 'loss': 16.6821, 'loss_cls': 1.3467, 'loss_mse': 0.0322, 'loss_nce': 15.3032, 'load_time': 50.0145, 'process_time': 49.9855}
+[2020-11-22 15:15:11] INFO: ==> Iteration [  2][  94 /  196]: {'prec_cls': 34.7329, 'loss': 16.6841, 'loss_cls': 1.347, 'loss_mse': 0.0322, 'loss_nce': 15.3049, 'load_time': 49.9552, 'process_time': 50.0448}
+[2020-11-22 15:15:12] INFO: ==> Iteration [  2][  95 /  196]: {'prec_cls': 34.6937, 'loss': 16.6884, 'loss_cls': 1.3471, 'loss_mse': 0.0322, 'loss_nce': 15.3091, 'load_time': 50.054, 'process_time': 49.946}
+[2020-11-22 15:15:13] INFO: ==> Iteration [  2][  96 /  196]: {'prec_cls': 34.6649, 'loss': 16.693, 'loss_cls': 1.3473, 'loss_mse': 0.0322, 'loss_nce': 15.3136, 'load_time': 49.9911, 'process_time': 50.0089}
+[2020-11-22 15:15:13] INFO: ==> Iteration [  2][  97 /  196]: {'prec_cls': 34.6785, 'loss': 16.6993, 'loss_cls': 1.3473, 'loss_mse': 0.0321, 'loss_nce': 15.3199, 'load_time': 50.0899, 'process_time': 49.9101}
+[2020-11-22 15:15:14] INFO: ==> Iteration [  2][  98 /  196]: {'prec_cls': 34.655, 'loss': 16.708, 'loss_cls': 1.3475, 'loss_mse': 0.0321, 'loss_nce': 15.3284, 'load_time': 50.0304, 'process_time': 49.9696}
+[2020-11-22 15:15:15] INFO: ==> Iteration [  2][  99 /  196]: {'prec_cls': 34.6547, 'loss': 16.7172, 'loss_cls': 1.3474, 'loss_mse': 0.0321, 'loss_nce': 15.3376, 'load_time': 50.1245, 'process_time': 49.8755}
+[2020-11-22 15:15:15] INFO: ==> Iteration [  2][ 100 /  196]: {'prec_cls': 34.6401, 'loss': 16.7284, 'loss_cls': 1.3475, 'loss_mse': 0.0322, 'loss_nce': 15.3487, 'load_time': 50.0727, 'process_time': 49.9273}
+[2020-11-22 15:15:16] INFO: ==> Iteration [  2][ 101 /  196]: {'prec_cls': 34.6104, 'loss': 16.7411, 'loss_cls': 1.3476, 'loss_mse': 0.0324, 'loss_nce': 15.3612, 'load_time': 50.1562, 'process_time': 49.8438}
+[2020-11-22 15:15:17] INFO: ==> Iteration [  2][ 102 /  196]: {'prec_cls': 34.6416, 'loss': 16.756, 'loss_cls': 1.3475, 'loss_mse': 0.0325, 'loss_nce': 15.376, 'load_time': 50.1022, 'process_time': 49.8978}
+[2020-11-22 15:15:18] INFO: ==> Iteration [  2][ 103 /  196]: {'prec_cls': 34.649, 'loss': 16.7739, 'loss_cls': 1.3474, 'loss_mse': 0.0327, 'loss_nce': 15.3938, 'load_time': 50.1912, 'process_time': 49.8088}
+[2020-11-22 15:15:19] INFO: ==> Iteration [  2][ 104 /  196]: {'prec_cls': 34.6515, 'loss': 16.7901, 'loss_cls': 1.3474, 'loss_mse': 0.0328, 'loss_nce': 15.4098, 'load_time': 50.1322, 'process_time': 49.8678}
+[2020-11-22 15:15:19] INFO: ==> Iteration [  2][ 105 /  196]: {'prec_cls': 34.6717, 'loss': 16.8055, 'loss_cls': 1.3473, 'loss_mse': 0.033, 'loss_nce': 15.4252, 'load_time': 50.2198, 'process_time': 49.7802}
+[2020-11-22 15:15:20] INFO: ==> Iteration [  2][ 106 /  196]: {'prec_cls': 34.6574, 'loss': 16.821, 'loss_cls': 1.3473, 'loss_mse': 0.0333, 'loss_nce': 15.4404, 'load_time': 50.1672, 'process_time': 49.8328}
+[2020-11-22 15:15:21] INFO: ==> Iteration [  2][ 107 /  196]: {'prec_cls': 34.6812, 'loss': 16.8378, 'loss_cls': 1.347, 'loss_mse': 0.0335, 'loss_nce': 15.4573, 'load_time': 50.2534, 'process_time': 49.7466}
+[2020-11-22 15:15:21] INFO: ==> Iteration [  2][ 108 /  196]: {'prec_cls': 34.6766, 'loss': 16.8581, 'loss_cls': 1.347, 'loss_mse': 0.0337, 'loss_nce': 15.4774, 'load_time': 50.1958, 'process_time': 49.8042}
+[2020-11-22 15:15:22] INFO: ==> Iteration [  2][ 109 /  196]: {'prec_cls': 34.6648, 'loss': 16.8783, 'loss_cls': 1.3471, 'loss_mse': 0.0339, 'loss_nce': 15.4974, 'load_time': 50.282, 'process_time': 49.718}
+[2020-11-22 15:15:23] INFO: ==> Iteration [  2][ 110 /  196]: {'prec_cls': 34.6666, 'loss': 16.899, 'loss_cls': 1.3471, 'loss_mse': 0.034, 'loss_nce': 15.5179, 'load_time': 50.2335, 'process_time': 49.7665}
+[2020-11-22 15:15:24] INFO: ==> Iteration [  2][ 111 /  196]: {'prec_cls': 34.6574, 'loss': 16.9176, 'loss_cls': 1.3471, 'loss_mse': 0.0341, 'loss_nce': 15.5365, 'load_time': 50.3153, 'process_time': 49.6847}
+[2020-11-22 15:15:24] INFO: ==> Iteration [  2][ 112 /  196]: {'prec_cls': 34.6654, 'loss': 16.9331, 'loss_cls': 1.3471, 'loss_mse': 0.0341, 'loss_nce': 15.5519, 'load_time': 50.2604, 'process_time': 49.7396}
+[2020-11-22 15:15:25] INFO: ==> Iteration [  2][ 113 /  196]: {'prec_cls': 34.6559, 'loss': 16.9543, 'loss_cls': 1.3471, 'loss_mse': 0.0342, 'loss_nce': 15.5729, 'load_time': 50.3513, 'process_time': 49.6487}
+[2020-11-22 15:15:26] INFO: ==> Iteration [  2][ 114 /  196]: {'prec_cls': 34.6787, 'loss': 16.9717, 'loss_cls': 1.3469, 'loss_mse': 0.0343, 'loss_nce': 15.5905, 'load_time': 50.2974, 'process_time': 49.7026}
+[2020-11-22 15:15:27] INFO: ==> Iteration [  2][ 115 /  196]: {'prec_cls': 34.6807, 'loss': 16.9887, 'loss_cls': 1.3469, 'loss_mse': 0.0344, 'loss_nce': 15.6074, 'load_time': 50.3734, 'process_time': 49.6266}
+[2020-11-22 15:15:27] INFO: ==> Iteration [  2][ 116 /  196]: {'prec_cls': 34.676, 'loss': 17.0002, 'loss_cls': 1.3469, 'loss_mse': 0.0344, 'loss_nce': 15.6189, 'load_time': 50.3205, 'process_time': 49.6795}
+[2020-11-22 15:15:28] INFO: ==> Iteration [  2][ 117 /  196]: {'prec_cls': 34.6592, 'loss': 17.0142, 'loss_cls': 1.347, 'loss_mse': 0.0345, 'loss_nce': 15.6328, 'load_time': 50.397, 'process_time': 49.603}
+[2020-11-22 15:15:29] INFO: ==> Iteration [  2][ 118 /  196]: {'prec_cls': 34.6328, 'loss': 17.0241, 'loss_cls': 1.3471, 'loss_mse': 0.0345, 'loss_nce': 15.6426, 'load_time': 50.3457, 'process_time': 49.6543}
+[2020-11-22 15:15:30] INFO: ==> Iteration [  2][ 119 /  196]: {'prec_cls': 34.6142, 'loss': 17.0299, 'loss_cls': 1.3472, 'loss_mse': 0.0345, 'loss_nce': 15.6482, 'load_time': 50.4232, 'process_time': 49.5768}
+[2020-11-22 15:15:30] INFO: ==> Iteration [  2][ 120 /  196]: {'prec_cls': 34.6122, 'loss': 17.038, 'loss_cls': 1.3472, 'loss_mse': 0.0345, 'loss_nce': 15.6564, 'load_time': 50.3709, 'process_time': 49.6291}
+[2020-11-22 15:15:31] INFO: ==> Iteration [  2][ 121 /  196]: {'prec_cls': 34.5945, 'loss': 17.0459, 'loss_cls': 1.3473, 'loss_mse': 0.0345, 'loss_nce': 15.6641, 'load_time': 50.4455, 'process_time': 49.5545}
+[2020-11-22 15:15:32] INFO: ==> Iteration [  2][ 122 /  196]: {'prec_cls': 34.5999, 'loss': 17.0496, 'loss_cls': 1.3473, 'loss_mse': 0.0345, 'loss_nce': 15.6678, 'load_time': 50.4034, 'process_time': 49.5966}
+[2020-11-22 15:15:33] INFO: ==> Iteration [  2][ 123 /  196]: {'prec_cls': 34.5659, 'loss': 17.0531, 'loss_cls': 1.3474, 'loss_mse': 0.0345, 'loss_nce': 15.6712, 'load_time': 50.4856, 'process_time': 49.5144}
+[2020-11-22 15:15:33] INFO: ==> Iteration [  2][ 124 /  196]: {'prec_cls': 34.5876, 'loss': 17.0563, 'loss_cls': 1.3473, 'loss_mse': 0.0344, 'loss_nce': 15.6745, 'load_time': 50.4393, 'process_time': 49.5607}
+[2020-11-22 15:15:34] INFO: ==> Iteration [  2][ 125 /  196]: {'prec_cls': 34.5805, 'loss': 17.0567, 'loss_cls': 1.3473, 'loss_mse': 0.0344, 'loss_nce': 15.6749, 'load_time': 50.5104, 'process_time': 49.4896}
+[2020-11-22 15:15:35] INFO: ==> Iteration [  2][ 126 /  196]: {'prec_cls': 34.5881, 'loss': 17.0556, 'loss_cls': 1.3473, 'loss_mse': 0.0344, 'loss_nce': 15.6739, 'load_time': 50.4816, 'process_time': 49.5184}
+[2020-11-22 15:15:36] INFO: ==> Iteration [  2][ 127 /  196]: {'prec_cls': 34.5988, 'loss': 17.0539, 'loss_cls': 1.3472, 'loss_mse': 0.0344, 'loss_nce': 15.6723, 'load_time': 50.5368, 'process_time': 49.4632}
+[2020-11-22 15:15:36] INFO: ==> Iteration [  2][ 128 /  196]: {'prec_cls': 34.6046, 'loss': 17.0536, 'loss_cls': 1.3471, 'loss_mse': 0.0344, 'loss_nce': 15.6721, 'load_time': 50.4914, 'process_time': 49.5086}
+[2020-11-22 15:15:37] INFO: ==> Iteration [  2][ 129 /  196]: {'prec_cls': 34.5987, 'loss': 17.0522, 'loss_cls': 1.3472, 'loss_mse': 0.0343, 'loss_nce': 15.6706, 'load_time': 50.5601, 'process_time': 49.4399}
+[2020-11-22 15:15:38] INFO: ==> Iteration [  2][ 130 /  196]: {'prec_cls': 34.5786, 'loss': 17.0494, 'loss_cls': 1.3473, 'loss_mse': 0.0344, 'loss_nce': 15.6678, 'load_time': 50.5186, 'process_time': 49.4814}
+[2020-11-22 15:15:39] INFO: ==> Iteration [  2][ 131 /  196]: {'prec_cls': 34.5994, 'loss': 17.046, 'loss_cls': 1.3472, 'loss_mse': 0.0344, 'loss_nce': 15.6644, 'load_time': 50.5984, 'process_time': 49.4016}
+[2020-11-22 15:15:39] INFO: ==> Iteration [  2][ 132 /  196]: {'prec_cls': 34.6018, 'loss': 17.041, 'loss_cls': 1.3472, 'loss_mse': 0.0344, 'loss_nce': 15.6594, 'load_time': 50.5518, 'process_time': 49.4482}
+[2020-11-22 15:15:40] INFO: ==> Iteration [  2][ 133 /  196]: {'prec_cls': 34.6103, 'loss': 17.0366, 'loss_cls': 1.3472, 'loss_mse': 0.0344, 'loss_nce': 15.6549, 'load_time': 50.629, 'process_time': 49.371}
+[2020-11-22 15:15:41] INFO: ==> Iteration [  2][ 134 /  196]: {'prec_cls': 34.606, 'loss': 17.0319, 'loss_cls': 1.3471, 'loss_mse': 0.0344, 'loss_nce': 15.6503, 'load_time': 50.584, 'process_time': 49.416}
+[2020-11-22 15:15:42] INFO: ==> Iteration [  2][ 135 /  196]: {'prec_cls': 34.6285, 'loss': 17.0253, 'loss_cls': 1.3469, 'loss_mse': 0.0345, 'loss_nce': 15.6439, 'load_time': 50.6618, 'process_time': 49.3382}
+[2020-11-22 15:15:42] INFO: ==> Iteration [  2][ 136 /  196]: {'prec_cls': 34.6547, 'loss': 17.0205, 'loss_cls': 1.3468, 'loss_mse': 0.0345, 'loss_nce': 15.6392, 'load_time': 50.6167, 'process_time': 49.3833}
+[2020-11-22 15:15:43] INFO: ==> Iteration [  2][ 137 /  196]: {'prec_cls': 34.6737, 'loss': 17.014, 'loss_cls': 1.3467, 'loss_mse': 0.0345, 'loss_nce': 15.6328, 'load_time': 50.6927, 'process_time': 49.3073}
+[2020-11-22 15:15:44] INFO: ==> Iteration [  2][ 138 /  196]: {'prec_cls': 34.6966, 'loss': 17.007, 'loss_cls': 1.3466, 'loss_mse': 0.0345, 'loss_nce': 15.626, 'load_time': 50.6458, 'process_time': 49.3542}
+[2020-11-22 15:15:45] INFO: ==> Iteration [  2][ 139 /  196]: {'prec_cls': 34.7038, 'loss': 17.001, 'loss_cls': 1.3465, 'loss_mse': 0.0344, 'loss_nce': 15.6201, 'load_time': 50.7079, 'process_time': 49.2921}
+[2020-11-22 15:15:45] INFO: ==> Iteration [  2][ 140 /  196]: {'prec_cls': 34.7001, 'loss': 16.9926, 'loss_cls': 1.3465, 'loss_mse': 0.0344, 'loss_nce': 15.6116, 'load_time': 50.6625, 'process_time': 49.3375}
+[2020-11-22 15:15:46] INFO: ==> Iteration [  2][ 141 /  196]: {'prec_cls': 34.7092, 'loss': 16.984, 'loss_cls': 1.3464, 'loss_mse': 0.0344, 'loss_nce': 15.6031, 'load_time': 50.7179, 'process_time': 49.2821}
+[2020-11-22 15:15:47] INFO: ==> Iteration [  2][ 142 /  196]: {'prec_cls': 34.7189, 'loss': 16.9771, 'loss_cls': 1.3463, 'loss_mse': 0.0344, 'loss_nce': 15.5963, 'load_time': 50.6742, 'process_time': 49.3258}
+[2020-11-22 15:15:47] INFO: ==> Iteration [  2][ 143 /  196]: {'prec_cls': 34.7526, 'loss': 16.9667, 'loss_cls': 1.346, 'loss_mse': 0.0344, 'loss_nce': 15.5863, 'load_time': 50.7348, 'process_time': 49.2652}
+[2020-11-22 15:15:48] INFO: ==> Iteration [  2][ 144 /  196]: {'prec_cls': 34.7497, 'loss': 16.9554, 'loss_cls': 1.3461, 'loss_mse': 0.0343, 'loss_nce': 15.575, 'load_time': 50.6895, 'process_time': 49.3105}
+[2020-11-22 15:15:49] INFO: ==> Iteration [  2][ 145 /  196]: {'prec_cls': 34.7532, 'loss': 16.945, 'loss_cls': 1.346, 'loss_mse': 0.0342, 'loss_nce': 15.5648, 'load_time': 50.7498, 'process_time': 49.2502}
+[2020-11-22 15:15:50] INFO: ==> Iteration [  2][ 146 /  196]: {'prec_cls': 34.7559, 'loss': 16.9358, 'loss_cls': 1.346, 'loss_mse': 0.0342, 'loss_nce': 15.5557, 'load_time': 50.7054, 'process_time': 49.2946}
+[2020-11-22 15:15:50] INFO: ==> Iteration [  2][ 147 /  196]: {'prec_cls': 34.7593, 'loss': 16.9264, 'loss_cls': 1.3459, 'loss_mse': 0.0342, 'loss_nce': 15.5462, 'load_time': 50.7652, 'process_time': 49.2348}
+[2020-11-22 15:15:51] INFO: ==> Iteration [  2][ 148 /  196]: {'prec_cls': 34.7693, 'loss': 16.9173, 'loss_cls': 1.3459, 'loss_mse': 0.0342, 'loss_nce': 15.5373, 'load_time': 50.7228, 'process_time': 49.2772}
+[2020-11-22 15:15:52] INFO: ==> Iteration [  2][ 149 /  196]: {'prec_cls': 34.7597, 'loss': 16.9106, 'loss_cls': 1.346, 'loss_mse': 0.0342, 'loss_nce': 15.5305, 'load_time': 50.7921, 'process_time': 49.2079}
+[2020-11-22 15:15:53] INFO: ==> Iteration [  2][ 150 /  196]: {'prec_cls': 34.7552, 'loss': 16.9039, 'loss_cls': 1.3459, 'loss_mse': 0.0341, 'loss_nce': 15.5239, 'load_time': 50.7506, 'process_time': 49.2494}
+[2020-11-22 15:15:53] INFO: ==> Iteration [  2][ 151 /  196]: {'prec_cls': 34.7698, 'loss': 16.8968, 'loss_cls': 1.3458, 'loss_mse': 0.0341, 'loss_nce': 15.517, 'load_time': 50.8075, 'process_time': 49.1925}
+[2020-11-22 15:15:54] INFO: ==> Iteration [  2][ 152 /  196]: {'prec_cls': 34.7839, 'loss': 16.8911, 'loss_cls': 1.3457, 'loss_mse': 0.034, 'loss_nce': 15.5113, 'load_time': 50.7671, 'process_time': 49.2329}
+[2020-11-22 15:15:55] INFO: ==> Iteration [  2][ 153 /  196]: {'prec_cls': 34.7803, 'loss': 16.8865, 'loss_cls': 1.3457, 'loss_mse': 0.034, 'loss_nce': 15.5068, 'load_time': 50.835, 'process_time': 49.165}
+[2020-11-22 15:15:56] INFO: ==> Iteration [  2][ 154 /  196]: {'prec_cls': 34.8011, 'loss': 16.8811, 'loss_cls': 1.3455, 'loss_mse': 0.0339, 'loss_nce': 15.5016, 'load_time': 50.7955, 'process_time': 49.2045}
+[2020-11-22 15:15:56] INFO: ==> Iteration [  2][ 155 /  196]: {'prec_cls': 34.799, 'loss': 16.8787, 'loss_cls': 1.3456, 'loss_mse': 0.0339, 'loss_nce': 15.4992, 'load_time': 50.8509, 'process_time': 49.1491}
+[2020-11-22 15:15:57] INFO: ==> Iteration [  2][ 156 /  196]: {'prec_cls': 34.8057, 'loss': 16.8765, 'loss_cls': 1.3455, 'loss_mse': 0.0339, 'loss_nce': 15.4971, 'load_time': 50.8064, 'process_time': 49.1936}
+[2020-11-22 15:15:58] INFO: ==> Iteration [  2][ 157 /  196]: {'prec_cls': 34.7995, 'loss': 16.8746, 'loss_cls': 1.3455, 'loss_mse': 0.0339, 'loss_nce': 15.4952, 'load_time': 50.8616, 'process_time': 49.1384}
+[2020-11-22 15:15:59] INFO: ==> Iteration [  2][ 158 /  196]: {'prec_cls': 34.7953, 'loss': 16.872, 'loss_cls': 1.3455, 'loss_mse': 0.0339, 'loss_nce': 15.4926, 'load_time': 50.8248, 'process_time': 49.1752}
+[2020-11-22 15:15:59] INFO: ==> Iteration [  2][ 159 /  196]: {'prec_cls': 34.8089, 'loss': 16.8698, 'loss_cls': 1.3453, 'loss_mse': 0.0339, 'loss_nce': 15.4906, 'load_time': 50.879, 'process_time': 49.121}
+[2020-11-22 15:16:00] INFO: ==> Iteration [  2][ 160 /  196]: {'prec_cls': 34.8175, 'loss': 16.8673, 'loss_cls': 1.3452, 'loss_mse': 0.0339, 'loss_nce': 15.4882, 'load_time': 50.8374, 'process_time': 49.1626}
+[2020-11-22 15:16:01] INFO: ==> Iteration [  2][ 161 /  196]: {'prec_cls': 34.8278, 'loss': 16.8649, 'loss_cls': 1.3451, 'loss_mse': 0.0338, 'loss_nce': 15.4859, 'load_time': 50.902, 'process_time': 49.098}
+[2020-11-22 15:16:02] INFO: ==> Iteration [  2][ 162 /  196]: {'prec_cls': 34.8277, 'loss': 16.8613, 'loss_cls': 1.3451, 'loss_mse': 0.0338, 'loss_nce': 15.4823, 'load_time': 50.8639, 'process_time': 49.1361}
+[2020-11-22 15:16:02] INFO: ==> Iteration [  2][ 163 /  196]: {'prec_cls': 34.8237, 'loss': 16.859, 'loss_cls': 1.3451, 'loss_mse': 0.0338, 'loss_nce': 15.48, 'load_time': 50.9155, 'process_time': 49.0845}
+[2020-11-22 15:16:03] INFO: ==> Iteration [  2][ 164 /  196]: {'prec_cls': 34.8112, 'loss': 16.8557, 'loss_cls': 1.3452, 'loss_mse': 0.0338, 'loss_nce': 15.4766, 'load_time': 50.8769, 'process_time': 49.1231}
+[2020-11-22 15:16:04] INFO: ==> Iteration [  2][ 165 /  196]: {'prec_cls': 34.8068, 'loss': 16.8482, 'loss_cls': 1.3453, 'loss_mse': 0.0338, 'loss_nce': 15.4691, 'load_time': 50.9282, 'process_time': 49.0718}
+[2020-11-22 15:16:05] INFO: ==> Iteration [  2][ 166 /  196]: {'prec_cls': 34.8212, 'loss': 16.8416, 'loss_cls': 1.3452, 'loss_mse': 0.0338, 'loss_nce': 15.4626, 'load_time': 50.8895, 'process_time': 49.1105}
+[2020-11-22 15:16:05] INFO: ==> Iteration [  2][ 167 /  196]: {'prec_cls': 34.8329, 'loss': 16.8359, 'loss_cls': 1.3452, 'loss_mse': 0.0338, 'loss_nce': 15.4569, 'load_time': 50.9515, 'process_time': 49.0485}
+[2020-11-22 15:16:06] INFO: ==> Iteration [  2][ 168 /  196]: {'prec_cls': 34.8307, 'loss': 16.8301, 'loss_cls': 1.3452, 'loss_mse': 0.0338, 'loss_nce': 15.4511, 'load_time': 50.9149, 'process_time': 49.0851}
+[2020-11-22 15:16:07] INFO: ==> Iteration [  2][ 169 /  196]: {'prec_cls': 34.8454, 'loss': 16.8241, 'loss_cls': 1.345, 'loss_mse': 0.0337, 'loss_nce': 15.4454, 'load_time': 50.9662, 'process_time': 49.0338}
+[2020-11-22 15:16:08] INFO: ==> Iteration [  2][ 170 /  196]: {'prec_cls': 34.8498, 'loss': 16.8176, 'loss_cls': 1.3449, 'loss_mse': 0.0337, 'loss_nce': 15.439, 'load_time': 50.9298, 'process_time': 49.0702}
+[2020-11-22 15:16:08] INFO: ==> Iteration [  2][ 171 /  196]: {'prec_cls': 34.8487, 'loss': 16.8121, 'loss_cls': 1.3449, 'loss_mse': 0.0337, 'loss_nce': 15.4335, 'load_time': 50.9891, 'process_time': 49.0109}
+[2020-11-22 15:16:09] INFO: ==> Iteration [  2][ 172 /  196]: {'prec_cls': 34.8692, 'loss': 16.8071, 'loss_cls': 1.3448, 'loss_mse': 0.0337, 'loss_nce': 15.4287, 'load_time': 50.9555, 'process_time': 49.0445}
+[2020-11-22 15:16:10] INFO: ==> Iteration [  2][ 173 /  196]: {'prec_cls': 34.8706, 'loss': 16.8029, 'loss_cls': 1.3447, 'loss_mse': 0.0336, 'loss_nce': 15.4246, 'load_time': 51.0151, 'process_time': 48.9849}
+[2020-11-22 15:16:11] INFO: ==> Iteration [  2][ 174 /  196]: {'prec_cls': 34.8826, 'loss': 16.7991, 'loss_cls': 1.3447, 'loss_mse': 0.0335, 'loss_nce': 15.4209, 'load_time': 50.9719, 'process_time': 49.0281}
+[2020-11-22 15:16:11] INFO: ==> Iteration [  2][ 175 /  196]: {'prec_cls': 34.8795, 'loss': 16.7953, 'loss_cls': 1.3447, 'loss_mse': 0.0335, 'loss_nce': 15.4171, 'load_time': 51.0306, 'process_time': 48.9694}
+[2020-11-22 15:16:12] INFO: ==> Iteration [  2][ 176 /  196]: {'prec_cls': 34.8724, 'loss': 16.7924, 'loss_cls': 1.3447, 'loss_mse': 0.0335, 'loss_nce': 15.4142, 'load_time': 50.9989, 'process_time': 49.0011}
+[2020-11-22 15:16:13] INFO: ==> Iteration [  2][ 177 /  196]: {'prec_cls': 34.887, 'loss': 16.7898, 'loss_cls': 1.3446, 'loss_mse': 0.0334, 'loss_nce': 15.4118, 'load_time': 51.0546, 'process_time': 48.9454}
+[2020-11-22 15:16:14] INFO: ==> Iteration [  2][ 178 /  196]: {'prec_cls': 34.8858, 'loss': 16.7873, 'loss_cls': 1.3446, 'loss_mse': 0.0334, 'loss_nce': 15.4093, 'load_time': 51.028, 'process_time': 48.972}
+[2020-11-22 15:16:14] INFO: ==> Iteration [  2][ 179 /  196]: {'prec_cls': 34.8897, 'loss': 16.7881, 'loss_cls': 1.3445, 'loss_mse': 0.0334, 'loss_nce': 15.4102, 'load_time': 51.0799, 'process_time': 48.9201}
+[2020-11-22 15:16:15] INFO: ==> Iteration [  2][ 180 /  196]: {'prec_cls': 34.9048, 'loss': 16.7881, 'loss_cls': 1.3444, 'loss_mse': 0.0333, 'loss_nce': 15.4104, 'load_time': 51.0499, 'process_time': 48.9501}
+[2020-11-22 15:16:16] INFO: ==> Iteration [  2][ 181 /  196]: {'prec_cls': 34.9121, 'loss': 16.7922, 'loss_cls': 1.3443, 'loss_mse': 0.0333, 'loss_nce': 15.4146, 'load_time': 51.0926, 'process_time': 48.9074}
+[2020-11-22 15:16:17] INFO: ==> Iteration [  2][ 182 /  196]: {'prec_cls': 34.9255, 'loss': 16.7964, 'loss_cls': 1.3443, 'loss_mse': 0.0333, 'loss_nce': 15.4189, 'load_time': 51.057, 'process_time': 48.943}
+[2020-11-22 15:16:17] INFO: ==> Iteration [  2][ 183 /  196]: {'prec_cls': 34.9198, 'loss': 16.801, 'loss_cls': 1.3443, 'loss_mse': 0.0332, 'loss_nce': 15.4234, 'load_time': 51.1032, 'process_time': 48.8968}
+[2020-11-22 15:16:18] INFO: ==> Iteration [  2][ 184 /  196]: {'prec_cls': 34.9368, 'loss': 16.8066, 'loss_cls': 1.3442, 'loss_mse': 0.0332, 'loss_nce': 15.4292, 'load_time': 51.0705, 'process_time': 48.9295}
+[2020-11-22 15:16:19] INFO: ==> Iteration [  2][ 185 /  196]: {'prec_cls': 34.9353, 'loss': 16.813, 'loss_cls': 1.3443, 'loss_mse': 0.0332, 'loss_nce': 15.4355, 'load_time': 51.1131, 'process_time': 48.8869}
+[2020-11-22 15:16:20] INFO: ==> Iteration [  2][ 186 /  196]: {'prec_cls': 34.9538, 'loss': 16.8182, 'loss_cls': 1.3442, 'loss_mse': 0.0332, 'loss_nce': 15.4407, 'load_time': 51.0776, 'process_time': 48.9224}
+[2020-11-22 15:16:20] INFO: ==> Iteration [  2][ 187 /  196]: {'prec_cls': 34.9552, 'loss': 16.8257, 'loss_cls': 1.3443, 'loss_mse': 0.0332, 'loss_nce': 15.4482, 'load_time': 51.1311, 'process_time': 48.8689}
+[2020-11-22 15:16:21] INFO: ==> Iteration [  2][ 188 /  196]: {'prec_cls': 34.962, 'loss': 16.8305, 'loss_cls': 1.3442, 'loss_mse': 0.0332, 'loss_nce': 15.453, 'load_time': 51.097, 'process_time': 48.903}
+[2020-11-22 15:16:22] INFO: ==> Iteration [  2][ 189 /  196]: {'prec_cls': 34.9656, 'loss': 16.836, 'loss_cls': 1.3442, 'loss_mse': 0.0333, 'loss_nce': 15.4585, 'load_time': 51.1424, 'process_time': 48.8576}
+[2020-11-22 15:16:23] INFO: ==> Iteration [  2][ 190 /  196]: {'prec_cls': 34.9671, 'loss': 16.8413, 'loss_cls': 1.3441, 'loss_mse': 0.0334, 'loss_nce': 15.4638, 'load_time': 51.1132, 'process_time': 48.8868}
+[2020-11-22 15:16:23] INFO: ==> Iteration [  2][ 191 /  196]: {'prec_cls': 34.9753, 'loss': 16.8459, 'loss_cls': 1.3441, 'loss_mse': 0.0334, 'loss_nce': 15.4684, 'load_time': 51.155, 'process_time': 48.845}
+[2020-11-22 15:16:24] INFO: ==> Iteration [  2][ 192 /  196]: {'prec_cls': 34.9688, 'loss': 16.8504, 'loss_cls': 1.3441, 'loss_mse': 0.0335, 'loss_nce': 15.4728, 'load_time': 51.1211, 'process_time': 48.8789}
+[2020-11-22 15:16:25] INFO: ==> Iteration [  2][ 193 /  196]: {'prec_cls': 34.9781, 'loss': 16.8531, 'loss_cls': 1.3441, 'loss_mse': 0.0335, 'loss_nce': 15.4754, 'load_time': 51.1668, 'process_time': 48.8332}
+[2020-11-22 15:16:26] INFO: ==> Iteration [  2][ 194 /  196]: {'prec_cls': 34.9808, 'loss': 16.8556, 'loss_cls': 1.3441, 'loss_mse': 0.0336, 'loss_nce': 15.4779, 'load_time': 51.1301, 'process_time': 48.8699}
+[2020-11-22 15:16:26] INFO: ==> Iteration [  2][ 195 /  196]: {'prec_cls': 34.9707, 'loss': 16.8565, 'loss_cls': 1.3441, 'loss_mse': 0.0336, 'loss_nce': 15.4788, 'load_time': 51.1622, 'process_time': 48.8378}
+[2020-11-22 15:16:27] INFO: ==> Iteration [  2][ 196 /  196]: {'prec_cls': 34.9685, 'loss': 16.8569, 'loss_cls': 1.3441, 'loss_mse': 0.0336, 'loss_nce': 15.4791, 'load_time': 51.1701, 'process_time': 48.8299}
+[2020-11-22 15:16:27] INFO: ==> Training stats: {'prec_cls': 34.9685, 'loss': 16.8569, 'loss_cls': 1.3441, 'loss_mse': 0.0336, 'loss_nce': 15.4791, 'load_time': 51.1701, 'process_time': 48.8299}
+[2020-11-22 15:16:29] INFO: 
+
+[2020-11-22 15:16:29] INFO: Evaluating: ImageNet_Decoupling_AlexNet
+[2020-11-22 15:16:29] INFO: ==> Dataset: imagenet_val [10000 images]
+[2020-11-22 15:16:29] INFO: ==> Iteration steps in one epoch: 20 [batch size 512]
+[2020-11-22 15:16:45] INFO: ==> Results: {'prec_rot': 38.2524, 'prec_inv': 24.9941, 'loss_rot': 1.3215, 'loss_inv': 1.4011, 'load_time': 50.5255, 'process_time': 49.4745}
+[2020-11-22 15:16:45] INFO: ==> Evaluation stats: {'prec_rot': 38.2524, 'prec_inv': 24.9941, 'loss_rot': 1.3215, 'loss_inv': 1.4011, 'load_time': 50.5255, 'process_time': 49.4745}
+[2020-11-22 15:16:45] INFO: 
+
+[2020-11-22 15:16:45] INFO: Training epoch [  3 / 200]
+[2020-11-22 15:16:45] INFO: ==> Set to feature optimizer lr = 0.0100000000
+[2020-11-22 15:16:45] INFO: ==> Set to classifier optimizer lr = 0.0100000000
+[2020-11-22 15:16:45] INFO: ==> Set to norm optimizer lr = 0.0100000000
+[2020-11-22 15:16:45] INFO: Training: ImageNet_Decoupling_AlexNet
+[2020-11-22 15:16:45] INFO: ==> Dataset: imagenet_train [100000 images]
+[2020-11-22 15:16:45] INFO: ==> Iteration steps in one epoch: 196 [batch size 512]
+[2020-11-22 15:16:47] INFO: ==> Iteration [  3][   1 /  196]: {'prec_cls': 35.9863, 'loss': 15.7621, 'loss_cls': 1.346, 'loss_mse': 0.0351, 'loss_nce': 14.381, 'load_time': 39.2644, 'process_time': 60.7356}
+[2020-11-22 15:16:48] INFO: ==> Iteration [  3][   2 /  196]: {'prec_cls': 34.9365, 'loss': 15.3196, 'loss_cls': 1.3463, 'loss_mse': 0.0348, 'loss_nce': 13.9385, 'load_time': 48.7, 'process_time': 51.3}
+[2020-11-22 15:16:49] INFO: ==> Iteration [  3][   3 /  196]: {'prec_cls': 35.1074, 'loss': 15.2813, 'loss_cls': 1.3466, 'loss_mse': 0.0381, 'loss_nce': 13.8966, 'load_time': 47.2643, 'process_time': 52.7357}
+[2020-11-22 15:16:49] INFO: ==> Iteration [  3][   4 /  196]: {'prec_cls': 34.9731, 'loss': 15.3119, 'loss_cls': 1.3483, 'loss_mse': 0.0398, 'loss_nce': 13.9239, 'load_time': 49.831, 'process_time': 50.169}
+[2020-11-22 15:16:50] INFO: ==> Iteration [  3][   5 /  196]: {'prec_cls': 35.332, 'loss': 15.2911, 'loss_cls': 1.3465, 'loss_mse': 0.0431, 'loss_nce': 13.9015, 'load_time': 48.962, 'process_time': 51.038}
+[2020-11-22 15:16:51] INFO: ==> Iteration [  3][   6 /  196]: {'prec_cls': 35.4167, 'loss': 15.2401, 'loss_cls': 1.3452, 'loss_mse': 0.0469, 'loss_nce': 13.848, 'load_time': 49.8041, 'process_time': 50.1959}
+[2020-11-22 15:16:52] INFO: ==> Iteration [  3][   7 /  196]: {'prec_cls': 35.4771, 'loss': 15.2104, 'loss_cls': 1.3445, 'loss_mse': 0.0504, 'loss_nce': 13.8155, 'load_time': 49.1236, 'process_time': 50.8764}
+[2020-11-22 15:16:52] INFO: ==> Iteration [  3][   8 /  196]: {'prec_cls': 35.4004, 'loss': 15.1656, 'loss_cls': 1.3451, 'loss_mse': 0.0526, 'loss_nce': 13.7678, 'load_time': 50.1749, 'process_time': 49.8251}
+[2020-11-22 15:16:53] INFO: ==> Iteration [  3][   9 /  196]: {'prec_cls': 35.0911, 'loss': 15.1634, 'loss_cls': 1.348, 'loss_mse': 0.0542, 'loss_nce': 13.7611, 'load_time': 49.5948, 'process_time': 50.4052}
+[2020-11-22 15:16:54] INFO: ==> Iteration [  3][  10 /  196]: {'prec_cls': 35.2148, 'loss': 15.1654, 'loss_cls': 1.3468, 'loss_mse': 0.0553, 'loss_nce': 13.7633, 'load_time': 50.467, 'process_time': 49.533}
+[2020-11-22 15:16:55] INFO: ==> Iteration [  3][  11 /  196]: {'prec_cls': 35.0897, 'loss': 15.1925, 'loss_cls': 1.348, 'loss_mse': 0.0554, 'loss_nce': 13.7891, 'load_time': 49.0935, 'process_time': 50.9065}
+[2020-11-22 15:16:56] INFO: ==> Iteration [  3][  12 /  196]: {'prec_cls': 35.2254, 'loss': 15.1963, 'loss_cls': 1.3461, 'loss_mse': 0.0551, 'loss_nce': 13.7952, 'load_time': 49.9736, 'process_time': 50.0264}
+[2020-11-22 15:16:56] INFO: ==> Iteration [  3][  13 /  196]: {'prec_cls': 35.0398, 'loss': 15.1989, 'loss_cls': 1.3464, 'loss_mse': 0.0551, 'loss_nce': 13.7975, 'load_time': 49.5658, 'process_time': 50.4342}
+[2020-11-22 15:16:57] INFO: ==> Iteration [  3][  14 /  196]: {'prec_cls': 35.3341, 'loss': 15.22, 'loss_cls': 1.345, 'loss_mse': 0.0553, 'loss_nce': 13.8197, 'load_time': 50.1459, 'process_time': 49.8541}
+[2020-11-22 15:16:58] INFO: ==> Iteration [  3][  15 /  196]: {'prec_cls': 35.4688, 'loss': 15.241, 'loss_cls': 1.3444, 'loss_mse': 0.0547, 'loss_nce': 13.8419, 'load_time': 49.8325, 'process_time': 50.1675}
+[2020-11-22 15:16:58] INFO: ==> Iteration [  3][  16 /  196]: {'prec_cls': 35.3241, 'loss': 15.2784, 'loss_cls': 1.3461, 'loss_mse': 0.0545, 'loss_nce': 13.8778, 'load_time': 50.1891, 'process_time': 49.8109}
+[2020-11-22 15:16:59] INFO: ==> Iteration [  3][  17 /  196]: {'prec_cls': 35.498, 'loss': 15.3069, 'loss_cls': 1.3445, 'loss_mse': 0.0539, 'loss_nce': 13.9085, 'load_time': 49.8756, 'process_time': 50.1244}
+[2020-11-22 15:17:00] INFO: ==> Iteration [  3][  18 /  196]: {'prec_cls': 35.5496, 'loss': 15.3309, 'loss_cls': 1.3435, 'loss_mse': 0.0531, 'loss_nce': 13.9343, 'load_time': 50.4766, 'process_time': 49.5234}
+[2020-11-22 15:17:01] INFO: ==> Iteration [  3][  19 /  196]: {'prec_cls': 35.5443, 'loss': 15.3577, 'loss_cls': 1.3439, 'loss_mse': 0.0526, 'loss_nce': 13.9612, 'load_time': 50.1568, 'process_time': 49.8432}
+[2020-11-22 15:17:01] INFO: ==> Iteration [  3][  20 /  196]: {'prec_cls': 35.5225, 'loss': 15.3847, 'loss_cls': 1.3437, 'loss_mse': 0.0523, 'loss_nce': 13.9887, 'load_time': 50.5817, 'process_time': 49.4183}
+[2020-11-22 15:17:02] INFO: ==> Iteration [  3][  21 /  196]: {'prec_cls': 35.3632, 'loss': 15.4169, 'loss_cls': 1.3449, 'loss_mse': 0.0519, 'loss_nce': 14.0201, 'load_time': 50.1922, 'process_time': 49.8078}
+[2020-11-22 15:17:03] INFO: ==> Iteration [  3][  22 /  196]: {'prec_cls': 35.1474, 'loss': 15.4594, 'loss_cls': 1.3463, 'loss_mse': 0.0517, 'loss_nce': 14.0615, 'load_time': 50.6671, 'process_time': 49.3329}
+[2020-11-22 15:17:04] INFO: ==> Iteration [  3][  23 /  196]: {'prec_cls': 35.2688, 'loss': 15.4923, 'loss_cls': 1.3456, 'loss_mse': 0.0515, 'loss_nce': 14.0952, 'load_time': 50.4096, 'process_time': 49.5904}
+[2020-11-22 15:17:04] INFO: ==> Iteration [  3][  24 /  196]: {'prec_cls': 35.3923, 'loss': 15.5231, 'loss_cls': 1.3448, 'loss_mse': 0.0516, 'loss_nce': 14.1267, 'load_time': 50.6437, 'process_time': 49.3563}
+[2020-11-22 15:17:05] INFO: ==> Iteration [  3][  25 /  196]: {'prec_cls': 35.2988, 'loss': 15.5509, 'loss_cls': 1.3449, 'loss_mse': 0.0511, 'loss_nce': 14.1548, 'load_time': 50.4213, 'process_time': 49.5787}
+[2020-11-22 15:17:06] INFO: ==> Iteration [  3][  26 /  196]: {'prec_cls': 35.3797, 'loss': 15.589, 'loss_cls': 1.3444, 'loss_mse': 0.0508, 'loss_nce': 14.1938, 'load_time': 50.7585, 'process_time': 49.2415}
+[2020-11-22 15:17:07] INFO: ==> Iteration [  3][  27 /  196]: {'prec_cls': 35.2268, 'loss': 15.6333, 'loss_cls': 1.3455, 'loss_mse': 0.0507, 'loss_nce': 14.2372, 'load_time': 50.5803, 'process_time': 49.4197}
+[2020-11-22 15:17:08] INFO: ==> Iteration [  3][  28 /  196]: {'prec_cls': 35.3132, 'loss': 15.6702, 'loss_cls': 1.3451, 'loss_mse': 0.0506, 'loss_nce': 14.2745, 'load_time': 50.763, 'process_time': 49.237}
+[2020-11-22 15:17:08] INFO: ==> Iteration [  3][  29 /  196]: {'prec_cls': 35.3751, 'loss': 15.7091, 'loss_cls': 1.3449, 'loss_mse': 0.0506, 'loss_nce': 14.3137, 'load_time': 50.5824, 'process_time': 49.4176}
+[2020-11-22 15:17:09] INFO: ==> Iteration [  3][  30 /  196]: {'prec_cls': 35.4102, 'loss': 15.7532, 'loss_cls': 1.3448, 'loss_mse': 0.0505, 'loss_nce': 14.3579, 'load_time': 50.9143, 'process_time': 49.0857}
+[2020-11-22 15:17:10] INFO: ==> Iteration [  3][  31 /  196]: {'prec_cls': 35.3453, 'loss': 15.7929, 'loss_cls': 1.3453, 'loss_mse': 0.0504, 'loss_nce': 14.3972, 'load_time': 50.7065, 'process_time': 49.2935}
+[2020-11-22 15:17:11] INFO: ==> Iteration [  3][  32 /  196]: {'prec_cls': 35.3867, 'loss': 15.8404, 'loss_cls': 1.3453, 'loss_mse': 0.0502, 'loss_nce': 14.4449, 'load_time': 50.9353, 'process_time': 49.0647}
+[2020-11-22 15:17:12] INFO: ==> Iteration [  3][  33 /  196]: {'prec_cls': 35.4611, 'loss': 15.8786, 'loss_cls': 1.3445, 'loss_mse': 0.0502, 'loss_nce': 14.4839, 'load_time': 50.768, 'process_time': 49.232}
+[2020-11-22 15:17:12] INFO: ==> Iteration [  3][  34 /  196]: {'prec_cls': 35.4119, 'loss': 15.9196, 'loss_cls': 1.3447, 'loss_mse': 0.05, 'loss_nce': 14.5249, 'load_time': 51.0542, 'process_time': 48.9458}
+[2020-11-22 15:17:13] INFO: ==> Iteration [  3][  35 /  196]: {'prec_cls': 35.4422, 'loss': 15.9642, 'loss_cls': 1.3445, 'loss_mse': 0.0497, 'loss_nce': 14.57, 'load_time': 50.8312, 'process_time': 49.1688}
+[2020-11-22 15:17:14] INFO: ==> Iteration [  3][  36 /  196]: {'prec_cls': 35.4858, 'loss': 16.0098, 'loss_cls': 1.3444, 'loss_mse': 0.0495, 'loss_nce': 14.6159, 'load_time': 51.1053, 'process_time': 48.8947}
+[2020-11-22 15:17:15] INFO: ==> Iteration [  3][  37 /  196]: {'prec_cls': 35.4717, 'loss': 16.0522, 'loss_cls': 1.3443, 'loss_mse': 0.0495, 'loss_nce': 14.6584, 'load_time': 50.8993, 'process_time': 49.1007}
+[2020-11-22 15:17:16] INFO: ==> Iteration [  3][  38 /  196]: {'prec_cls': 35.4209, 'loss': 16.0962, 'loss_cls': 1.3442, 'loss_mse': 0.0496, 'loss_nce': 14.7024, 'load_time': 51.0965, 'process_time': 48.9035}
+[2020-11-22 15:17:16] INFO: ==> Iteration [  3][  39 /  196]: {'prec_cls': 35.4329, 'loss': 16.1343, 'loss_cls': 1.3442, 'loss_mse': 0.0495, 'loss_nce': 14.7406, 'load_time': 50.9418, 'process_time': 49.0582}
+[2020-11-22 15:17:17] INFO: ==> Iteration [  3][  40 /  196]: {'prec_cls': 35.5505, 'loss': 16.1706, 'loss_cls': 1.3436, 'loss_mse': 0.0494, 'loss_nce': 14.7777, 'load_time': 51.1862, 'process_time': 48.8138}
+[2020-11-22 15:17:18] INFO: ==> Iteration [  3][  41 /  196]: {'prec_cls': 35.5516, 'loss': 16.2026, 'loss_cls': 1.343, 'loss_mse': 0.0492, 'loss_nce': 14.8105, 'load_time': 50.9794, 'process_time': 49.0206}
+[2020-11-22 15:17:19] INFO: ==> Iteration [  3][  42 /  196]: {'prec_cls': 35.5957, 'loss': 16.2439, 'loss_cls': 1.3423, 'loss_mse': 0.0492, 'loss_nce': 14.8524, 'load_time': 51.1465, 'process_time': 48.8535}
+[2020-11-22 15:17:19] INFO: ==> Iteration [  3][  43 /  196]: {'prec_cls': 35.5809, 'loss': 16.2717, 'loss_cls': 1.3426, 'loss_mse': 0.0492, 'loss_nce': 14.8799, 'load_time': 51.0488, 'process_time': 48.9512}
+[2020-11-22 15:17:20] INFO: ==> Iteration [  3][  44 /  196]: {'prec_cls': 35.5779, 'loss': 16.2988, 'loss_cls': 1.3425, 'loss_mse': 0.0491, 'loss_nce': 14.9072, 'load_time': 51.2409, 'process_time': 48.7591}
+[2020-11-22 15:17:21] INFO: ==> Iteration [  3][  45 /  196]: {'prec_cls': 35.6033, 'loss': 16.3241, 'loss_cls': 1.3418, 'loss_mse': 0.0491, 'loss_nce': 14.9332, 'load_time': 51.0769, 'process_time': 48.9231}
+[2020-11-22 15:17:22] INFO: ==> Iteration [  3][  46 /  196]: {'prec_cls': 35.6127, 'loss': 16.3398, 'loss_cls': 1.3415, 'loss_mse': 0.049, 'loss_nce': 14.9493, 'load_time': 51.2174, 'process_time': 48.7826}
+[2020-11-22 15:17:23] INFO: ==> Iteration [  3][  47 /  196]: {'prec_cls': 35.6154, 'loss': 16.354, 'loss_cls': 1.3413, 'loss_mse': 0.0489, 'loss_nce': 14.9638, 'load_time': 51.0753, 'process_time': 48.9247}
+[2020-11-22 15:17:23] INFO: ==> Iteration [  3][  48 /  196]: {'prec_cls': 35.555, 'loss': 16.3667, 'loss_cls': 1.3416, 'loss_mse': 0.0487, 'loss_nce': 14.9763, 'load_time': 51.2348, 'process_time': 48.7652}
+[2020-11-22 15:17:24] INFO: ==> Iteration [  3][  49 /  196]: {'prec_cls': 35.5459, 'loss': 16.3769, 'loss_cls': 1.3415, 'loss_mse': 0.0485, 'loss_nce': 14.9869, 'load_time': 51.0666, 'process_time': 48.9334}
+[2020-11-22 15:17:25] INFO: ==> Iteration [  3][  50 /  196]: {'prec_cls': 35.5869, 'loss': 16.3815, 'loss_cls': 1.3411, 'loss_mse': 0.0487, 'loss_nce': 14.9917, 'load_time': 51.1985, 'process_time': 48.8015}
+[2020-11-22 15:17:26] INFO: ==> Iteration [  3][  51 /  196]: {'prec_cls': 35.6302, 'loss': 16.3907, 'loss_cls': 1.341, 'loss_mse': 0.0486, 'loss_nce': 15.0012, 'load_time': 51.0946, 'process_time': 48.9054}
+[2020-11-22 15:17:26] INFO: ==> Iteration [  3][  52 /  196]: {'prec_cls': 35.6689, 'loss': 16.4017, 'loss_cls': 1.3407, 'loss_mse': 0.0484, 'loss_nce': 15.0126, 'load_time': 51.195, 'process_time': 48.805}
+[2020-11-22 15:17:27] INFO: ==> Iteration [  3][  53 /  196]: {'prec_cls': 35.6888, 'loss': 16.4097, 'loss_cls': 1.3405, 'loss_mse': 0.0483, 'loss_nce': 15.0209, 'load_time': 51.1066, 'process_time': 48.8934}
+[2020-11-22 15:17:28] INFO: ==> Iteration [  3][  54 /  196]: {'prec_cls': 35.6753, 'loss': 16.4212, 'loss_cls': 1.3405, 'loss_mse': 0.0482, 'loss_nce': 15.0325, 'load_time': 51.2656, 'process_time': 48.7344}
+[2020-11-22 15:17:29] INFO: ==> Iteration [  3][  55 /  196]: {'prec_cls': 35.7138, 'loss': 16.4347, 'loss_cls': 1.3403, 'loss_mse': 0.0481, 'loss_nce': 15.0464, 'load_time': 51.172, 'process_time': 48.828}
+[2020-11-22 15:17:29] INFO: ==> Iteration [  3][  56 /  196]: {'prec_cls': 35.7082, 'loss': 16.4425, 'loss_cls': 1.3404, 'loss_mse': 0.0479, 'loss_nce': 15.0542, 'load_time': 51.2593, 'process_time': 48.7407}
+[2020-11-22 15:17:30] INFO: ==> Iteration [  3][  57 /  196]: {'prec_cls': 35.743, 'loss': 16.4559, 'loss_cls': 1.3402, 'loss_mse': 0.0478, 'loss_nce': 15.0679, 'load_time': 51.1698, 'process_time': 48.8302}
+[2020-11-22 15:17:31] INFO: ==> Iteration [  3][  58 /  196]: {'prec_cls': 35.8011, 'loss': 16.464, 'loss_cls': 1.3397, 'loss_mse': 0.0476, 'loss_nce': 15.0767, 'load_time': 51.2953, 'process_time': 48.7047}
+[2020-11-22 15:17:32] INFO: ==> Iteration [  3][  59 /  196]: {'prec_cls': 35.8763, 'loss': 16.4734, 'loss_cls': 1.339, 'loss_mse': 0.0476, 'loss_nce': 15.0868, 'load_time': 51.1571, 'process_time': 48.8429}
+[2020-11-22 15:17:32] INFO: ==> Iteration [  3][  60 /  196]: {'prec_cls': 35.9041, 'loss': 16.4789, 'loss_cls': 1.3388, 'loss_mse': 0.0475, 'loss_nce': 15.0926, 'load_time': 51.3099, 'process_time': 48.6901}
+[2020-11-22 15:17:33] INFO: ==> Iteration [  3][  61 /  196]: {'prec_cls': 35.9567, 'loss': 16.4851, 'loss_cls': 1.3385, 'loss_mse': 0.0474, 'loss_nce': 15.0992, 'load_time': 51.2158, 'process_time': 48.7842}
+[2020-11-22 15:17:34] INFO: ==> Iteration [  3][  62 /  196]: {'prec_cls': 35.9627, 'loss': 16.492, 'loss_cls': 1.3384, 'loss_mse': 0.0472, 'loss_nce': 15.1063, 'load_time': 51.319, 'process_time': 48.681}
+[2020-11-22 15:17:35] INFO: ==> Iteration [  3][  63 /  196]: {'prec_cls': 36.0212, 'loss': 16.4963, 'loss_cls': 1.3378, 'loss_mse': 0.0472, 'loss_nce': 15.1113, 'load_time': 51.2337, 'process_time': 48.7663}
+[2020-11-22 15:17:36] INFO: ==> Iteration [  3][  64 /  196]: {'prec_cls': 36.0619, 'loss': 16.5025, 'loss_cls': 1.3374, 'loss_mse': 0.0471, 'loss_nce': 15.118, 'load_time': 51.3455, 'process_time': 48.6545}
+[2020-11-22 15:17:37] INFO: ==> Iteration [  3][  65 /  196]: {'prec_cls': 36.1215, 'loss': 16.5117, 'loss_cls': 1.337, 'loss_mse': 0.047, 'loss_nce': 15.1277, 'load_time': 51.254, 'process_time': 48.746}
+[2020-11-22 15:17:37] INFO: ==> Iteration [  3][  66 /  196]: {'prec_cls': 36.1121, 'loss': 16.5151, 'loss_cls': 1.3369, 'loss_mse': 0.047, 'loss_nce': 15.1312, 'load_time': 51.3523, 'process_time': 48.6477}
+[2020-11-22 15:17:38] INFO: ==> Iteration [  3][  67 /  196]: {'prec_cls': 36.1146, 'loss': 16.5176, 'loss_cls': 1.3369, 'loss_mse': 0.0469, 'loss_nce': 15.1338, 'load_time': 51.2735, 'process_time': 48.7265}
+[2020-11-22 15:17:39] INFO: ==> Iteration [  3][  68 /  196]: {'prec_cls': 36.117, 'loss': 16.5183, 'loss_cls': 1.3369, 'loss_mse': 0.047, 'loss_nce': 15.1344, 'load_time': 51.401, 'process_time': 48.599}
+[2020-11-22 15:17:40] INFO: ==> Iteration [  3][  69 /  196]: {'prec_cls': 36.1668, 'loss': 16.5214, 'loss_cls': 1.3366, 'loss_mse': 0.0469, 'loss_nce': 15.1379, 'load_time': 51.3089, 'process_time': 48.6911}
+[2020-11-22 15:17:41] INFO: ==> Iteration [  3][  70 /  196]: {'prec_cls': 36.1607, 'loss': 16.5241, 'loss_cls': 1.3366, 'loss_mse': 0.0469, 'loss_nce': 15.1406, 'load_time': 51.391, 'process_time': 48.609}
+[2020-11-22 15:17:42] INFO: ==> Iteration [  3][  71 /  196]: {'prec_cls': 36.1541, 'loss': 16.5194, 'loss_cls': 1.3366, 'loss_mse': 0.0469, 'loss_nce': 15.1359, 'load_time': 51.3343, 'process_time': 48.6657}
+[2020-11-22 15:17:42] INFO: ==> Iteration [  3][  72 /  196]: {'prec_cls': 36.1674, 'loss': 16.5149, 'loss_cls': 1.3364, 'loss_mse': 0.0468, 'loss_nce': 15.1317, 'load_time': 51.4638, 'process_time': 48.5362}
+[2020-11-22 15:17:43] INFO: ==> Iteration [  3][  73 /  196]: {'prec_cls': 36.1843, 'loss': 16.5129, 'loss_cls': 1.336, 'loss_mse': 0.0468, 'loss_nce': 15.1301, 'load_time': 51.3535, 'process_time': 48.6465}
+[2020-11-22 15:17:44] INFO: ==> Iteration [  3][  74 /  196]: {'prec_cls': 36.1882, 'loss': 16.5136, 'loss_cls': 1.336, 'loss_mse': 0.0467, 'loss_nce': 15.1309, 'load_time': 51.4645, 'process_time': 48.5355}
