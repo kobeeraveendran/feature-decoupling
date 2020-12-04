@@ -7,6 +7,7 @@ import numpy as np
 import torch
 
 from . import Algorithm
+import csv
 
 def accuracy(output, target, topk=(1,)):
     """Computes the precision@k for the specified values of k"""
@@ -129,6 +130,10 @@ class DecouplingModel(Algorithm):
         record['load_time'] = 100*(batch_load_time/total_time)
         record['process_time'] = 100*(batch_process_time/total_time)
 
+        with open("rot_loss_logs.csv", 'a') as file:
+            writer = csv.writer(file)
+            writer.writerow([record['loss'], record['loss_cls']])
+
         return record
 
     def evaluation_step(self, batch):
@@ -176,5 +181,10 @@ class DecouplingModel(Algorithm):
         total_time = batch_process_time + batch_load_time
         record['load_time'] = 100*(batch_load_time/total_time)
         record['process_time'] = 100*(batch_process_time/total_time)
+
+
+        with open("rot_eval_logs.csv", 'a') as file:
+            writer = csv.writer(file)
+            writer.writerow([record['prec_rot'], record['prec_inv']])
 
         return record
