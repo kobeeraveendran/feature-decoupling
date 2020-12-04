@@ -185,7 +185,7 @@ class DataLoader(object):
 
         tnt_dataset = tnt.dataset.ListDataset(elem_list = range(self.epoch_size),
                                               load      = _load_function)
-        data_loader = tnt_dataset.parallel(batch_size   = self.batch_size,
+        data_loader = tnt_dataset.parallel(batch_size   = self.batch_size * 2,
                                            collate_fn   = _collate_fun,
                                            num_workers  = self.num_workers,
                                            shuffle      = self.shuffle)
