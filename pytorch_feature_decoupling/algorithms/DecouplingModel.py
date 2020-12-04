@@ -62,8 +62,8 @@ class DecouplingModel(Algorithm):
         
         idx_train = 4*batch[2].numpy()
         idx_train[1::4] += 1
-        idx_train[2::4] += 2
-        idx_train[3::4] += 3
+        idx_train[2::4] += 1
+        idx_train[3::4] += 1
         #********************************************************
         batch_load_time = time.time() - start
 

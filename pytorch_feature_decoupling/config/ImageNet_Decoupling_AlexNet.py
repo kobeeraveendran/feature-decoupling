@@ -1,4 +1,4 @@
-batch_size   = 256
+batch_size   = 512
 
 config = {}
 # set the parameters related to the training and testing set
