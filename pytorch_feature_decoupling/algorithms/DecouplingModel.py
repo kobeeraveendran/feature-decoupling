@@ -130,7 +130,7 @@ class DecouplingModel(Algorithm):
         record['load_time'] = 100*(batch_load_time/total_time)
         record['process_time'] = 100*(batch_process_time/total_time)
 
-        with open("rot_loss_logs.csv", 'a') as file:
+        with open("rot_loss_logs.csv", 'a', newline = '') as file:
             writer = csv.writer(file)
             writer.writerow([record['loss'], record['loss_cls']])
 
@@ -183,7 +183,7 @@ class DecouplingModel(Algorithm):
         record['process_time'] = 100*(batch_process_time/total_time)
 
 
-        with open("rot_eval_logs.csv", 'a') as file:
+        with open("rot_eval_logs.csv", 'a', newline = '') as file:
             writer = csv.writer(file)
             writer.writerow([record['prec_rot'], record['prec_inv']])
 
