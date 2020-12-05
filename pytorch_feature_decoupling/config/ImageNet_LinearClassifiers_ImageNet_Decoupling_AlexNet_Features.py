@@ -23,7 +23,7 @@ config['max_num_epochs'] = 65
 
 networks = {}
 
-pretrained = '../_experiments/ImageNet_Decoupling_AlexNet_dropout_binrot/feature_net_epoch200'
+pretrained = '../_experiments/ImageNet_Decoupling_AlexNet_dropout_binrotv2/feature_net_epoch200'
 #pretrained = "../feature_net_epoch"
 networks['feat_extractor'] = {'def_file': 'architectures/AlexNetFeature.py', 'pretrained': pretrained, 'opt': {},  'optim_params': None} 
 
