@@ -63,8 +63,8 @@ class DecouplingModel(Algorithm):
         
         idx_train = 4*batch[2].numpy()
         idx_train[1::4] += 1
-        idx_train[2::4] += 2
-        idx_train[3::4] += 3
+        idx_train[2::4] += 1
+        idx_train[3::4] += 1
         #********************************************************
         batch_load_time = time.time() - start
 
@@ -130,6 +130,7 @@ class DecouplingModel(Algorithm):
         record['load_time'] = 100*(batch_load_time/total_time)
         record['process_time'] = 100*(batch_process_time/total_time)
 
+        # logging for loss plotting
         with open("rot_loss_logs.csv", 'a', newline = '') as file:
             writer = csv.writer(file)
             writer.writerow([record['loss'], record['loss_cls']])
@@ -182,7 +183,7 @@ class DecouplingModel(Algorithm):
         record['load_time'] = 100*(batch_load_time/total_time)
         record['process_time'] = 100*(batch_process_time/total_time)
 
-
+        # logging for precision plotting
         with open("rot_eval_logs.csv", 'a', newline = '') as file:
             writer = csv.writer(file)
             writer.writerow([record['prec_rot'], record['prec_inv']])
