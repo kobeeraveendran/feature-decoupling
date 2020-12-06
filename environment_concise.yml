@@ -1,0 +1,11 @@
+name: /home/cap6614.student6/my-envs/feat-decoupling
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.6.5
+  - torchvision==0.2.2
+  - cudatoolkit=10.0
+  - pytorch==1.0.1
+  - tqdm
+prefix: /home/cap6614.student6/my-envs/feat-decoupling
