@@ -30,9 +30,9 @@ First clone this repository on your user's system on Newton:
 cd /home/<your_newton_username>/ && git clone https://github.com/kobeeraveendran/feature-decoupling.git
 ```
 
-No matter which conda environment creation method you used from the [setup](https://github.com/kobeeraveendran/feature-decoupling) page, you will need to change the SLURM script prior to running. In particular, change the path to the conda environment and repository path to match your Newton user.
+No matter which conda environment creation method you used from the [setup](https://github.com/kobeeraveendran/feature-decoupling) page, you will need to make a change to **ALL** of the below SLURM scripts prior to running. In particular, change the path to the conda environment and repository path to match your Newton user.
 
-Specifically, change these lines from my user's path to your user's path:
+In other words, change these lines from my user's path to represent your user's path:
 
 ```bash
 # change this
