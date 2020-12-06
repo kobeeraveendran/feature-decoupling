@@ -1,4 +1,4 @@
-name: /home/cap6614.student6/my-envs/feat-decoupling
+name: feat-decoupling
 channels:
   - defaults
   - conda-forge
@@ -10,4 +10,5 @@ dependencies:
   - tqdm
   - matplotlib
   - pandas
-prefix: /home/cap6614.student6/my-envs/feat-decoupling
+  - pip:
+    - torchnet

@@ -1,4 +1,4 @@
-name: /home/cap6614.student6/my-envs/feat-decoupling
+name: feat-decoupling
 channels:
   - pytorch
   - defaults
@@ -83,4 +83,3 @@ dependencies:
     - urllib3==1.26.2
     - visdom==0.1.8.9
     - websocket-client==0.57.0
-prefix: /home/cap6614.student6/my-envs/feat-decoupling
