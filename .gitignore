@@ -21,3 +21,4 @@ config_env__*.*
 *.dot
 *.jpg
 _imgs/
+*.pdf
