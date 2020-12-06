@@ -8,4 +8,6 @@ dependencies:
   - cudatoolkit=10.0
   - pytorch==1.0.1
   - tqdm
+  - matplotlib
+  - pandas
 prefix: /home/cap6614.student6/my-envs/feat-decoupling
