@@ -1,25 +1,56 @@
-## *FeatureDecoupling Training and Linear Evaluation*
+# *FeatureDecoupling++ Training and Evaluation*
 
-### License
+## Requirements
 
-This part of the code is released under the MIT License (refer to the LICENSE file for details).
+* `python==3.6.5`
+* [`pytorch==1.0.1`](http://pytorch.org/)
+* [`torchnet`](https://github.com/pytorch/tnt)
+* [`tqdm`](https://github.com/tqdm/tqdm)
 
-### Requirements
+## Before running the experiments
 
-* python 3.6.5
-* [pytorch](http://pytorch.org/) 1.0
-* [torchnet](https://github.com/pytorch/tnt)
-* [tqdm](https://github.com/tqdm/tqdm)
+* Note that all the experiment configuration files are placed in the [config](https://github.com/kobeeraveendran/feature-decoupling/tree/master/pytorch_feature_decoupling/config) directory. Make sure that the `IMAGENET_DIR` points to the path of the Tiny ImageNet dataset. You can download Tiny ImageNet [here](http://cs231n.stanford.edu/tiny-imagenet-200.zip). If on Newton, you can instead run the following in a directory of your choice to download Tiny ImageNet directly on Newton:
 
-### Before running the experiments
+```bash
+wget http://cs231n.stanford.edu/tiny-imagenet-200.zip
+unzip tiny-imagenet-200.zip
+```
 
-* Note that all the experiment configuration files are placed in the [config](https://github.com/philiptheother/FeatureDecoupling/tree/master/pytorch_feature_decoupling/config) directory.
+* The PU probabilities of each training instances should be stored in the file `prob.dat` and placed under the directory of [prob](https://github.com/kobeeraveendran/FeatureDecoupling/tree/master/_experiments/ImageNet_Decoupling_AlexNet/prob). You can download the PU probabilities for ImageNet-based datasets (such as Tiny ImageNet) here: [prob.dat](https://mega.nz/#!brBVnQbK!AU2P0D1yh4L1V9aqP3LYsWaG464q3SD-yRg5BZ7st8c). To move these PU probs to Newton, run the following and log in to Newton:
 
-* The PU probabilities of each training instances should be stored in the file *prob.dat* and placed under the directory of [prob](https://github.com/philiptheother/FeatureDecoupling/tree/master/_experiments/ImageNet_Decoupling_AlexNet/prob). For those instances originated from ImageNet training set, this file can be downloaded from [prob.dat](https://mega.nz/#!brBVnQbK!AU2P0D1yh4L1V9aqP3LYsWaG464q3SD-yRg5BZ7st8c). If you want to use PU module in FeatureDecoupling for your own dataset, you have to first train a [RotNet](https://github.com/gidariss/FeatureLearningRotNet) on your dataset and predict instance probabilities. This prediction is better to be estimated out-of-sample to avoid over-fitting.
+```bash
+scp -i ~/<newton_keys_path>/<username>_id_rsa_1 ~/Downloads/prob.dat <username>@newton.ist.ucf.edu:<feature-decoupling_path>/_experiments/ImageNet_Decoupling_AlexNet/prob/prob.dat
+```
 
-### Usage
+## Running the Experiments on Newton
 
-Specify the number of data loading workers (--num_workers) and display steps intervals (--disp_step) according to your own preferences.
+No matter which conda environment creation method you used from the [setup](https://github.com/kobeeraveendran/feature-decoupling) page, you will need to change the SLURM script prior to running. In particular, change the path to the conda environment and repository path to match your Newton user.
+
+Specifically, change these lines from my user's path to your user's path:
+
+```bash
+# change this
+source activate /home/cap6614.student6/my-envs/feat-decoupling
+# and this
+time python /home/cap6614.student6/feature-decoupling/pytorch_feature_decoupling/main.py --exp=ImageNet_Decoupling_AlexNet --evaluate 0 --num_workers 4
+
+# to this
+source activate /home/<your_username>/my-envs/feat-decoupling
+# and this
+time python /home/<your_username>/feature-decoupling/pytorch_feature_decoupling/main.py --exp=ImageNet_Decoupling_AlexNet --evaluate 0 --num_workers 4
+```
+
+Within Newton, enter this directory (`pytorch_feature_decoupling`).
+
+* To train the model on Tiny ImageNet, simply run `sbatch submit_script.slurm`. Note that you must allow this SLURM job to finish executing before running the linear/non-linear classifier evaluations below.
+
+* To train and evaluate linear classifiers on Tiny ImageNet using conv layers from the model you've just trained, run `sbatch lin_classifier_submit.slurm`
+
+* To train and evaluate non-linear classifiers on Tiny ImageNet using conv layers from the model you've just trained, run `sbatch nonlin_classifier_submit.slurm`
+
+## Running on a Local System
+
+Specify the number of data loading workers (`--num_workers`) and display steps intervals (`--disp_step`) according to your own preferences.
 
 * Train a FeatureDecoupling model (with AlexNet architecture) on ImageNet training set:  
 `python main.py --exp=ImageNet_Decoupling_AlexNet --evaluate 0`
@@ -33,6 +64,24 @@ Specify the number of data loading workers (--num_workers) and display steps int
 * Train & evaluate non-linear classifiers for the ImageNet task on the feature maps generated by the conv4 and conv5 convolutional layers of the pre-trained FeatureDecoupling model:  
 `python main.py --exp=ImageNet_NonLinearClassifiers_ImageNet_Decoupling_AlexNet_Features --evaluate 0`
 
+## Generating Plots for Visualization
+
+To visualize loss and precision evolution throughout the training phase, you can generate plots after training has completed by running:
+
+```bash
+python generate_plots.py
+```
+
+Note that, if training multiple times (or training multiple models), you ***must rename the previously-generated CSV files***, since new values will be appended to the values of older runs otherwise.
+
+By default this script uses files generated during training: `rot_loss_logs.csv` and `rot_eval_logs.csv`. If for some reason you run into issues or you'd like to generate plots for CSV files that you've renamed, you can pass the filenames in as arguments:
+
+*NOTE: If you do this, make sure you supply both paths to avoid accidentally generating plots from different models/runs.*
+
+```bash
+python generate_plots.py --loss_path some_other_rot_loss.csv --eval_path some_other_rot_eval.csv
+```
+
 ### Acknowledgment
 
-* Some of our codes in pytorch_feature_decoupling reuse the github project [FeatureLearningRotNet](https://github.com/gidariss/FeatureLearningRotNet) and project [lemniscate.pytorch](https://github.com/zhirongw/lemniscate.pytorch).
+* Most of the code and setup instructions I used have come directly from the authors of the Rotation Feature Decoupling paper. You can find their code and paper [here](https://github.com/philiptheother/FeatureDecoupling).
