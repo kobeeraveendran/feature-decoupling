@@ -20,4 +20,4 @@ config_env__*.*
 *.dat
 *.dot
 *.jpg
-*.png
+_imgs/
