@@ -81,6 +81,7 @@ By default this script uses files generated during training: `rot_loss_logs.csv`
 ```bash
 python generate_plots.py --loss_path some_other_rot_loss.csv --eval_path some_other_rot_eval.csv
 ```
+Your generated plots can be found in the [`plots`](https://github.com/kobeeraveendran/feature-decoupling/tree/master/pytorch_feature_decoupling/plots) folder. I've supplied plots from my runs in this folder as well.
 
 ### Acknowledgment
 
