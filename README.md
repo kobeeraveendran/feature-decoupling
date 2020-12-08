@@ -34,6 +34,7 @@ If none of the above automatic methods worked, you may also install the packages
 
 ```bash
 conda create -n feat-decoupling python=3.6.5 -y
+conda activate feat-decoupling
 conda install pytorch==1.0.1 torchvision==0.2.2 cudatoolkit=10.0 -c pytorch -y
 conda install -c conda-forge tqdm -y
 pip install torchnet
